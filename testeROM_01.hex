@@ -1,0 +1,19 @@
+0000 0000 0000 0010
+1110 000010 010 000
+
+0000 0000 0000 0010
+1110 000010 010 000
+
+0000 0000 0000 0011
+1110 000010 010 000
+
+1110 001100 001 000
+1010 1010 1010 1010
+
+/*
+	Este arquivo ainda é ficcional, pois contém espaços, linhas em branco, \n e pior de tudo! está codificado em utf-8
+	Um hex verdadeiro seria um bitstream, um stream contínuo de bits e aqui é apenas caracteres '1' e '0' da tabela ascii
+
+	Logo, será condensado em teste_01.rom
+
+*/
