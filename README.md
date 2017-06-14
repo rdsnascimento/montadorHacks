@@ -8,5 +8,5 @@ Criar máquina virtual.
 
 - [x] Entender a Máquina Virtual
 - [x] Criar as Classes
-- [ ] Realizar as instruções
+- [ ] Emular as Instruções
 - [ ] ~~Confirmar com o Grupo~~
