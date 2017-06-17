@@ -1,82 +1,76 @@
 import java.nio.file.*;
+// pra leitura da Rom
+
+import java.util.regex
+// expressões regulares
 
 public class HacksVirtualMachine {
 
-	private short ram[];
-	private short rom[];
+	public short ram[];
+	public short rom[];
 
-	private short D, A, PC; // registradores
+	public short D, A; // registradores
+	public int PC; 
 
 	public HacksVirtualMachine(int memorySize){
 
-		ram = new short [memorySize];
-		rom = new short [memorySize];
+		PC = D = A = 0;
 
-		D = A = PC = 0;
+		ram = new short [memorySize];
+		rom = new short [memorySize];			
 	}
-	/*
+	
 	public HacksVirtualMachine(){
-		HacksVirtualMachine(32768);
+		this( (int)Math.pow(2,15) ); 
+		// caso default é a memória máxima = 15 bits , 2^15
 	}
-	*/
+	
 	public boolean loadRom(String fileName) {
 		try {
 			Path file = FileSystems.getDefault().getPath(fileName);
 			byte fileBuffer[] = Files.readAllBytes(file);
+			// I/O max usage
 			
-			for(int i = 0, j = 0; i < fileBuffer.length/2; i++){
-				rom[i] = (short) fileBuffer[j++];
-				rom[i] |= (short)(fileBuffer[j++] << 8);
-			}
-			return true;
-
+			for(int i = 0, j = 0; i < fileBuffer.length/2; i++)
+				rom[i] = (short) (fileBuffer[j++] | (fileBuffer[j++] << 8) );
+			// cada short recebe 2 bytes					
 		}
 		catch(Exception e){
-			System.out.println("Exception: " + e);
-			return false;			
-		}	
+			System.err.println("Exception: " + e);
+			return false;					
+		}
+		
+		return true;
 	}
 
 	public boolean exec() {
-		/* 16 bits divididos em 
-			trio, a, c, d, j
+		/* função que faz Tudo,
+		isto é, executa as instruções
 
-			trio não recebeu nome na especificação,
-			a 1 bit qual lado da tabela de instrução
-			c 6 bits função da instrução
-			d 3 bits destino
-			j 3 bits jump
+		/* 16 bits divididos em 
+			?, a, c, d, j
+
+			? 3 bits - não recebeu nome na especificação, mas é 0 pra tipo-A ou 111 pra tipo-C
+			a 1 bit  - qual lado da tabela de instrução
+			c 6 bits - função da instrução
+			d 3 bits - destino da ALU
+			j 3 bits - jump
 		*/ 
 
-		byte trio, a, c, d, j;
-		short instruction = rom[PC];
-		trio = (byte) (instruction >> 29);
-
-		if ((trio>>18) == 0)
-			A = instruction;
-		else
-			if(trio == 0b101)				
-				return false;
-			else
-				if(trio == 0b100){
-					a = (byte) ((instruction << 19) >> 31);
-					c = (byte) ((instruction << 20) >> 26);
-					d = (byte) ((instruction << 26) >> 29);
-					j = (byte) ((instruction << 29) >> 29);
-
-					/* ... continuar daqui
-
-					Precisa tratar cada instrução, pra cada destino, com cada possibilidade de jump. Mas eu acho que um Array de funções ainda é a melhor coisa
-					*/
-					return true;
-				}
-
-				else{
-					System.out.println("Instrução desconhecida, PC: " + PC);
-					return false;
-				}
+		// Ou String instruction = Integer.toBinaryString(rom[PC++]);	
+		// Ou int instruction = rom[PC++];	
+		// fetch instrução e já incrementa PC
+		// antes era mais eficiente, mas foooo... vai com String e RegExp
 
 
-		return true; // ... rever aqui, porque precisou pra compilar
+		
+		// debug
+		System.out.println("Instrução: " + instruction);
+
+		
+		
+
+		System.err.println("Instrução " + instruction + " desconhecida");
+		return false;							
 	}
 }

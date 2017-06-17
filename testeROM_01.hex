@@ -15,5 +15,4 @@
 	Um hex verdadeiro seria um bitstream, um stream contínuo de bits e aqui é apenas caracteres '1' e '0' da tabela ascii
 
 	Logo, será condensado em teste_01.rom
-
 */
