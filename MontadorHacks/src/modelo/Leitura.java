@@ -55,18 +55,14 @@ public class Leitura extends Decodifica { // importa metodos do decodifica
                     auxLeitura.decAssembler(receptor); // se for do tipo 0, passa a string inteira para decAssembler
                 } if (tipo == 1){ // Se for do tipo 1, faz a separação dos bits conforme arquitetura
                     
-                    aux[0] = receptor.charAt(0); // copiando para vetor auxiliar
-                    aux[1] = receptor.charAt(1);
-                    aux[2] = receptor.charAt(2);
+                    aux[0] = receptor.charAt(3); // copiando para vetor auxiliar
                     
                     a += aux[0]; // copiar para string a respectivos bits
-                    a += aux[1];
-                    a += aux[2];
                     
                     
                     System.out.println(a); // Exibe os bits na saída padrão, comentar para não exibir
                     
-                    for(int i = 0, j = 3; j < 10; i++, j++){
+                    for(int i = 0, j = 4; j < 10; i++, j++){
                         
                         aux[i] = receptor.charAt(j); // copiando bits para vetor auxiliar
                         
@@ -78,7 +74,6 @@ public class Leitura extends Decodifica { // importa metodos do decodifica
                     comp += aux[3];
                     comp += aux[4];
                     comp += aux[5];
-                    comp += aux[6];
                     
                     System.out.println(comp); // exibe comp na saida padrão, comentar para não exibir
                     
