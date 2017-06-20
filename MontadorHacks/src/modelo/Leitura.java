@@ -52,7 +52,20 @@ public class Leitura extends Decodifica { // importa metodos do decodifica
                 }
                 
                 if(tipo == 0){ // testa tipo de instrução
-                    auxLeitura.decAssembler(receptor); // se for do tipo 0, passa a string inteira para decAssembler
+                    
+                    for(int i = 0, j = 1; j < 16; i++, j++){ // parte corrigida da entrada caso for 0, pega apenas 15 bits
+                        
+                        aux[i] = receptor.charAt(j); // copiando bits para vetor auxiliar
+                        
+                    }
+                    
+                    for(int i = 0; i < 15; i++){ // copiando de vetor auxiliar para string a
+                        a += aux[i];
+                    }
+                    
+                    System.out.println(a);
+                    auxLeitura.decAssembler(a); // se for do tipo 0, passa 15 bits para decAssembler
+                    
                 } if (tipo == 1){ // Se for do tipo 1, faz a separação dos bits conforme arquitetura
                     
                     aux[0] = receptor.charAt(3); // copiando para vetor auxiliar
