@@ -28,6 +28,18 @@ public class MainDeTeste {
 
     }**/
     
+    /**
+    public void execucao(){
+        RegMem dados = new RegMem();
+        dados.setPc(0); //zera o PC
+    
+        while( dados.getMemROM(dados.getPc()) !=0 ){ //Enquanto tiver conteúdo na Memória de Instruções "memRom[PC]"
+           
+             
+            dados.setPc(dados.getPc()+1); //incrementa PC
+        }
+    }**/
+    
     public static void main(String[] args) { // metodo main para teste
 
         Leitura leitor = new Leitura();
@@ -47,5 +59,15 @@ public class MainDeTeste {
         System.out.println("Memória["+0+"]: "+dados.getMemDados(0));
         System.out.println("Memória["+1+"]: "+dados.getMemDados(1));
         System.out.println("Memória["+2+"]: "+dados.getMemDados(2));
+        
+        dados.setPc(0); //zera o PC
+        while( dados.getMemROM(dados.getPc()) !=0 ){ //Enquanto tiver conteúdo na Memória de Instruções "memRom[PC]"
+            /**
+             * Codigo aqui
+             */
+             
+            //incrementa pc
+            dados.setPc(dados.getPc()+1); //incrementa PC
+        }
     }   
 }

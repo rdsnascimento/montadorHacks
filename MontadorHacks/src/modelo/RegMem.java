@@ -16,7 +16,7 @@ public class RegMem {
     private static short[] memDados = new short[32768]; //Memória de Dados
     private static String[] memROM = new String[32768]; //Memória de Instruções
     private static int indice = 0; //Índice do vetor da Memória de Dados
-    private static int pc; //PC sempre vai apontar para a posição da Memória de Instruções (ROM)
+    private static int pc = 0; //PC sempre vai apontar para a posição da Memória de Instruções (ROM)
 
     /**
      * Getter e Setter Registrador A
@@ -76,5 +76,21 @@ public class RegMem {
 
     public static void setPc(int pc) {
         RegMem.pc = pc;
+    }
+    
+    /**
+     * Getter e Setter posição da memória
+     */
+    public short getMemROM() {
+        return memDados[indice];
+    }
+
+    public short getMemROM(int i) { //retorna determinada posicao da memória
+        return memDados[i];
+    }
+
+    public void setMemROM(String valor) {
+        memROM[pc] = valor; //
+        setPc(getPc()+1); //Pc++
     }
 }
