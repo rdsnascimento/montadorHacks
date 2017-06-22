@@ -225,4 +225,8 @@ public class Decodifica extends RegMem {
         }
 
     }
+    
+    public void decAssembler(short a){
+        setRegA(a);
+    }
 }

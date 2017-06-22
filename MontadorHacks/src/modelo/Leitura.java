@@ -63,8 +63,15 @@ public class Leitura extends Decodifica { // importa metodos do decodifica
                         a += aux[i];
                     }
                     
+
                     System.out.println(a);
                     //auxLeitura.decAssembler(a); // se for do tipo 0, passa 15 bits para decAssembler
+
+                    short adress = (short) Integer.parseInt(a, 2); // converte binario (do tipo string) para inteiro e usa cast para short
+                    
+                    System.out.println(adress);
+                    auxLeitura.decAssembler(adress); // se for do tipo 0, passa valor decimal para decAssembler
+
                     
                 } if (tipo == 1){ // Se for do tipo 1, faz a separação dos bits conforme arquitetura
                     
