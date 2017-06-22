@@ -44,8 +44,8 @@ public class MainDeTeste {
         System.out.println("Imprimindo:");
         System.out.println("Registrador D: " + dados.getRegA());
         System.out.println("Registrador A: " + dados.getRegD());
-        System.out.println("Memória["+0+"]: "+dados.getMemoria(0));
-        System.out.println("Memória["+1+"]: "+dados.getMemoria(1));
-        System.out.println("Memória["+2+"]: "+dados.getMemoria(2));
+        System.out.println("Memória["+0+"]: "+dados.getMemDados(0));
+        System.out.println("Memória["+1+"]: "+dados.getMemDados(1));
+        System.out.println("Memória["+2+"]: "+dados.getMemDados(2));
     }   
 }
