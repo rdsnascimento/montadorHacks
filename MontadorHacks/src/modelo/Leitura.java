@@ -21,7 +21,7 @@ public class Leitura extends Decodifica { // importa metodos do decodifica
         
     }
     
-    public void lerEntrada() throws FileNotFoundException{ // Essa exceção é lançada pra fora do método para parar o método se não existir arquivo de leitura ...
+    public void lerEntrada(String arq) throws FileNotFoundException{ // Essa exceção é lançada pra fora do método para parar o método se não existir arquivo de leitura ...
         
         Leitura auxLeitura = new Leitura(); // objeto auxiliar para usar métodos
         
@@ -34,7 +34,7 @@ public class Leitura extends Decodifica { // importa metodos do decodifica
         char []aux = new char[16]; // vetor de caracteres auxiliar nas operações de strings
         
         try{ // Primeiro Try utilizado somente para capturar exceção de não existencia de arquivo fonte
-            Scanner leitor = new Scanner(new FileReader("input.txt")).useDelimiter("\n"); // cria leitor de arquivo
+            Scanner leitor = new Scanner(new FileReader(arq)).useDelimiter("\n"); // cria leitor de arquivo
             
             while(leitor.hasNext()){ // executa enquanto existem linhas a serem lidas no arquivo
                 a = ""; // "limpa" strings
@@ -64,7 +64,7 @@ public class Leitura extends Decodifica { // importa metodos do decodifica
                     }
                     
                     System.out.println(a);
-                    auxLeitura.decAssembler(a); // se for do tipo 0, passa 15 bits para decAssembler
+                    //auxLeitura.decAssembler(a); // se for do tipo 0, passa 15 bits para decAssembler
                     
                 } if (tipo == 1){ // Se for do tipo 1, faz a separação dos bits conforme arquitetura
                     
@@ -175,7 +175,7 @@ public class Leitura extends Decodifica { // importa metodos do decodifica
         else return 2;
     }
     
-    public static void main(String[] args){ // metodo main para teste
+    /*public static void main(String[] args){ // metodo main para teste
         
         Leitura leitor = new Leitura();
         
@@ -188,7 +188,7 @@ public class Leitura extends Decodifica { // importa metodos do decodifica
             System.out.println("Não tem arquivo ...");
         }
         
-    }
+    }*/
     
     
 }

@@ -34,7 +34,7 @@ public class MainDeTeste {
         
 
         try {
-            leitor.lerEntrada();
+            leitor.lerEntrada("input.txt");
         } catch (FileNotFoundException e) {
             System.out.println("Não tem arquivo ...");
         }
@@ -46,6 +46,6 @@ public class MainDeTeste {
         System.out.println("Registrador A: " + dados.getRegD());
         System.out.println("Memória["+0+"]: "+dados.getMemoria(0));
         System.out.println("Memória["+1+"]: "+dados.getMemoria(1));
-        
+        System.out.println("Memória["+2+"]: "+dados.getMemoria(2));
     }   
 }
