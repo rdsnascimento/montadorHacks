@@ -39,8 +39,8 @@ public class ControleVisaoPrincipal {
         dados = new RegMem();
         vp.setRegistrador(Short.toString(dados.getRegA()), Short.toString(dados.getRegD()));
         
-        for(int i=0;i<dados.getPc();i++){
-            vp.setMemoria(Short.toString(dados.getMemoria(i)),linhaProgCont(i),colunaProgCont(i));
+        for(int i=0;i<dados.getIndice();i++){
+            vp.setMemoria(Short.toString(dados.getMemDados(i)),linhaProgCont(i),colunaProgCont(i));
             vp.setInstrucoes(Integer.toString(i), i, 0);
             vp.setInstrucoes("A+D", i, 1);
             vp.setInstrucoes("Apenas exemplo", i, 2);
