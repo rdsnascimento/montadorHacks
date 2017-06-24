@@ -45,87 +45,15 @@ public class Leitura extends Decodifica { // importa metodos do decodifica
                 receptor = leitor.next(); // le arquivo
                 try{ // segundo try para tratar erros no formato de entrada da instrução
                     
-                int tipo = auxLeitura.tipoInstrucao(receptor); // verifica qual tipo de instrução é baseado nos primeiros numeros
+                    int tipo = auxLeitura.tipoInstrucao(receptor); // verifica qual tipo de instrução é baseado nos primeiros numeros
                     
-                if(!auxLeitura.verificaNumero(receptor) || !auxLeitura.verificaTamanho(receptor) || ( tipo == 2) ){ // catch para capturar erros de formato de instrução
-                    throw new Exception("Instrução invalida...\n"); // lança exceção para instrução inválida
-                }
+                    if(!auxLeitura.verificaNumero(receptor) || !auxLeitura.verificaTamanho(receptor) || ( tipo == 2) ){ // catch para capturar erros de formato de instrução
+                        throw new Exception("Instrução invalida...\n"); // lança exceção para instrução inválida
+                    }
                 
-                if(tipo == 0){ // testa tipo de instrução
-                    
-                    for(int i = 0, j = 1; j < 16; i++, j++){ // parte corrigida da entrada caso for 0, pega apenas 15 bits
-                        
-                        aux[i] = receptor.charAt(j); // copiando bits para vetor auxiliar
-                        
-                    }
-                    
-                    for(int i = 0; i < 15; i++){ // copiando de vetor auxiliar para string a
-                        a += aux[i];
-                    }
-                    
-
-                    System.out.println(a);
-                    //auxLeitura.decAssembler(a); // se for do tipo 0, passa 15 bits para decAssembler
-
-                    short adress = (short) Integer.parseInt(a, 2); // converte binario (do tipo string) para inteiro e usa cast para short
-                    
-                    System.out.println(adress);
-                    auxLeitura.decAssembler(adress); // se for do tipo 0, passa valor decimal para decAssembler
-
-                    
-                } if (tipo == 1){ // Se for do tipo 1, faz a separação dos bits conforme arquitetura
-                    
-                    aux[0] = receptor.charAt(3); // copiando para vetor auxiliar
-                    
-                    a += aux[0]; // copiar para string a respectivos bits
-                    
-                    
-                    System.out.println(a); // Exibe os bits na saída padrão, comentar para não exibir
-                    
-                    for(int i = 0, j = 4; j < 10; i++, j++){
-                        
-                        aux[i] = receptor.charAt(j); // copiando bits para vetor auxiliar
-                        
-                    }
-                    
-                    comp += aux[0]; // copiando respectivos bits para comp
-                    comp += aux[1];
-                    comp += aux[2];
-                    comp += aux[3];
-                    comp += aux[4];
-                    comp += aux[5];
-                    
-                    System.out.println(comp); // exibe comp na saida padrão, comentar para não exibir
-                    
-                    for(int i = 0, j = 10; j < 13; i++, j++){
-                        
-                        aux[i] = receptor.charAt(j); // copiando bits para vetor auxiliar
-                        
-                    }
-                    
-                    dest += aux[0]; // copiando de vetor auxiliar para dest
-                    dest += aux[1];
-                    dest += aux[2];
-                    
-                    System.out.println(dest); // exibe dest, comentar para não exibir
-                    
-                    for(int i = 0, j = 13; j < 16; i++, j++){
-                        
-                        aux[i] = receptor.charAt(j); // copiando de receptor para vetor auxiliar
-                        
-                    }
-                    
-                    jump += aux[0]; // copiando de vetor auxiliar para jump
-                    jump += aux[1];
-                    jump += aux[2];
-                    
-                    System.out.println(jump); // exibe jump, comentar para não exibir
-                    
-                    auxLeitura.decAssembler(a, comp, dest, jump); // passa bits separados conforme arquitetura para decAssembler
-                    
-                }
+                    auxLeitura.setMemROM(receptor); // passa string inteira para rom
                 
-                System.out.println("instrução ok ..\n"); // Flag para avisar se instrução foi validada, comentar para não exibir
+                    System.out.println("instrução adicionada a memória rom ..\n"); // Flag para avisar se instrução foi passada para rom comentar para não exibir
                 
                 }
                 
@@ -135,6 +63,7 @@ public class Leitura extends Decodifica { // importa metodos do decodifica
                     
                 
             }
+            
         }
         
         
@@ -147,6 +76,97 @@ public class Leitura extends Decodifica { // importa metodos do decodifica
         
         
         
+        
+    }
+    
+    public void romToDecod(String receptor){
+        
+        Leitura auxLeitura = new Leitura(); // cria metodo auxiliar da classe leitura
+        
+        String a = new String();    // strings utilizadas nas operações de separação de bits
+        String comp = new String(); // são os parametros para o método decAssembler
+        String dest = new String(); //
+        String jump = new String(); //
+        
+        char []aux = new char[16]; // vetor de caracteres auxiliar nas operações de strings
+        
+        
+        int tipo = auxLeitura.tipoInstrucao(receptor); // verifica qual tipo de instrução é baseado nos primeiros numeros
+        
+        if(tipo == 0){ // testa tipo de instrução
+                    
+          for(int i = 0, j = 1; j < 16; i++, j++){ // parte corrigida da entrada caso for 0, pega apenas 15 bits
+                        
+            aux[i] = receptor.charAt(j); // copiando bits para vetor auxiliar
+                        
+          }
+                    
+          for(int i = 0; i < 15; i++){ // copiando de vetor auxiliar para string a
+             a += aux[i];
+          }
+                    
+
+          System.out.println(a);
+
+          short adress = (short) Integer.parseInt(a, 2); // converte binario (do tipo string) para inteiro e usa cast para short
+                    
+          System.out.println(adress); // imprime valor imediato
+          auxLeitura.decAssembler(adress); // se for do tipo 0, passa valor decimal para decAssembler
+
+                    
+        } else if (tipo == 1){ // Se for do tipo 1, faz a separação dos bits conforme arquitetura
+                    
+          aux[0] = receptor.charAt(3); // copiando para vetor auxiliar
+                    
+          a += aux[0]; // copiar para string a respectivos bits
+                    
+                    
+          System.out.println(a); // Exibe os bits na saída padrão, comentar para não exibir
+                    
+          for(int i = 0, j = 4; j < 10; i++, j++){
+                        
+             aux[i] = receptor.charAt(j); // copiando bits para vetor auxiliar
+                        
+           }
+                    
+           comp += aux[0]; // copiando respectivos bits para comp
+           comp += aux[1];
+           comp += aux[2];
+           comp += aux[3];
+           comp += aux[4];
+           comp += aux[5];
+                    
+           System.out.println(comp); // exibe comp na saida padrão, comentar para não exibir
+                    
+           for(int i = 0, j = 10; j < 13; i++, j++){
+                        
+                aux[i] = receptor.charAt(j); // copiando bits para vetor auxiliar
+                        
+           }
+                    
+           dest += aux[0]; // copiando de vetor auxiliar para dest
+           dest += aux[1];
+           dest += aux[2];
+                    
+           System.out.println(dest); // exibe dest, comentar para não exibir
+                    
+           for(int i = 0, j = 13; j < 16; i++, j++){
+                        
+                aux[i] = receptor.charAt(j); // copiando de receptor para vetor auxiliar
+                        
+            }
+                    
+            jump += aux[0]; // copiando de vetor auxiliar para jump
+            jump += aux[1];
+            jump += aux[2];
+                    
+            System.out.println(jump); // exibe jump, comentar para não exibir
+                    
+            auxLeitura.decAssembler(a, comp, dest, jump); // passa bits separados conforme arquitetura para decAssembler
+                    
+            }
+        
+        System.out.println("Passagem de bits para dec ok!"); // exibe flag para informar que passagem e separação de bits foi ok // comentar para não exibir
         
     }
     
@@ -181,6 +201,8 @@ public class Leitura extends Decodifica { // importa metodos do decodifica
             return 1;
         else return 2;
     }
+    
+    
     
     /*public static void main(String[] args){ // metodo main para teste
         
