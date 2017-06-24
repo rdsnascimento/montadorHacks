@@ -26,7 +26,7 @@ public class Main {
         RegMem exec = new RegMem();
 
         exec.setPc(0); //zerando o Pc
-        while (exec.getMemROM(exec.getPc()) != null) { //memRom[pc] != null
+        while (exec.getMemROM(exec.getPc()) != null) { //while (memRom[pc] != null)
             leitor.romToDecod(exec.getMemROM(exec.getPc())); //romToDecod (memRom[pc]) ou seja mandando cada instrução da rom pra decodificação
             exec.setPc(exec.getPc() + 1); //pc++
         }
