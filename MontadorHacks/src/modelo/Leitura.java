@@ -24,22 +24,11 @@ public class Leitura extends Decodifica { // importa metodos do decodifica
         Leitura auxLeitura = new Leitura(); // objeto auxiliar para usar métodos
 
         String receptor = new String(); // string utilizada para ler arquivo
-        String a = new String();    // strings utilizadas nas operações de separação de bits
-        String comp = new String(); // são os parametros para o método decAssembler
-        String dest = new String(); //
-        String jump = new String(); //
-
-        char[] aux = new char[16]; // vetor de caracteres auxiliar nas operações de strings
-
+      
         try { // Primeiro Try utilizado somente para capturar exceção de não existencia de arquivo fonte
             Scanner leitor = new Scanner(new FileReader(arq)).useDelimiter("\n"); // cria leitor de arquivo
 
             while (leitor.hasNext()) { // executa enquanto existem linhas a serem lidas no arquivo
-                a = ""; // "limpa" strings
-                comp = "";
-                dest = "";
-                jump = "";
-
                 receptor = leitor.next(); // le arquivo
                 try { // segundo try para tratar erros no formato de entrada da instrução
 
