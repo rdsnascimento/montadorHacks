@@ -44,17 +44,21 @@ public class RegMem {
      * Getter e Setter posição da memória
      */
     public short getMemDados() {
-        return memDados[indice];
+        return memDados[getRegA()]; //retorna Memory [A]
     }
 
     public short getMemDados(int i) { //retorna determinada posicao da memória
-        return memDados[i];
+        return memDados[i]; 
+    }
+    
+    public void setMemDados(short valor) {
+        memDados[getRegA()] = valor; //Memory [A] = valor
     }
 
-    public void setMemDados(short valor) {
-        memDados[indice] = valor;
-        setIndice(getIndice() + 1); //indice++
-    }
+//    public void setMemDados(short valor) {
+//        memDados[indice] = valor;
+//        setIndice(getIndice() + 1); //indice++
+//    }
 
     /**
      * Getter e Setter Indice Memória de Dados
@@ -70,23 +74,23 @@ public class RegMem {
     /**
      * Getter e Setter PC ROM
      */
-    public static int getPc() {
+    public int getPc() {
         return pc;
     }
 
-    public static void setPc(int pc) {
+    public void setPc(int pc) {
         RegMem.pc = pc;
     }
     
     /**
      * Getter e Setter posição da memória
      */
-    public short getMemROM() {
-        return memDados[indice];
+    public String getMemROM() {
+        return memROM[pc];
     }
 
-    public short getMemROM(int i) { //retorna determinada posicao da memória
-        return memDados[i];
+    public String getMemROM(int i) { //retorna determinada posicao da memória
+        return memROM[i];
     }
 
     public void setMemROM(String valor) {
