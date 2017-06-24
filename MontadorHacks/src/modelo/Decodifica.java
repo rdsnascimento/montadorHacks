@@ -285,6 +285,7 @@ public class Decodifica extends RegMem {
     
     //Coloca valor imediato no Registrador A
     public void decAssembler(short a){
+        this.operacao = "A=valor";  //Registrador A recebe imediato
         setRegA(a);
     }
     
