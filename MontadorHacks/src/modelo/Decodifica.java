@@ -229,9 +229,6 @@ public class Decodifica extends RegMem {
                 setRegD(this.temp);
                 setMemDados(this.temp);
                 break;
-            default:
-                //Erro
-                System.out.println("Erro: destino inválido");
         }
         
         //Switch para saber se tem JUMP e pra onde pular
