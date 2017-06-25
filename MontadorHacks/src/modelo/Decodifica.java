@@ -239,45 +239,45 @@ public class Decodifica extends RegMem {
             case "000":
                 this.jumpString = "null";
                 break; //NULL
-            case "001": 
+            case "001":  //setPc(getRegA()-1). Esse -1 é porque pc é incrementado logo a seguir de quando é chamado esse setPc. Então -1+1=0.
                 if(this.temp>0){ //this.temp é o atributo que contém o valor decodificado pelos bits de comp
                     this.jumpString = "JGT rom[A]";
-                    setPc(getRegA()); //Se (comp>0) então PC passa apontar para memRom[regA]. MEMÓRIA ROM é a MEMÓRIA QUE CONTÉM AS INTRUÇÕES. 
+                    setPc(getRegA()-1); //Se (comp>0) então PC passa apontar para memRom[regA]. MEMÓRIA ROM é a MEMÓRIA QUE CONTÉM AS INTRUÇÕES. 
                 }
                 break;
             case "010":
                 if(this.temp==0){
                     this.jumpString = "JEQ rom[A]";
-                    setPc(getRegA()); //Se (comp==0) então PC passa apontar para memRom[regA]
+                    setPc(getRegA()-1); //Se (comp==0) então PC passa apontar para memRom[regA]
                 }
                 break;
             case "011":
                 if(this.temp>=0){
                     this.jumpString = "JGE rom[A]";
-                    setPc(getRegA()); //Se (comp>=0) então PC passa apontar para memRom[regA]
+                    setPc(getRegA()-1); //Se (comp>=0) então PC passa apontar para memRom[regA]
                 }
                 break;
             case "100":
                 if(this.temp<0){ 
                     this.jumpString = "JLT rom[A]";
-                    setPc(getRegA()); //Se (comp<0) então PC passa apontar para memRom[regA]
+                    setPc(getRegA()-1); //Se (comp<0) então PC passa apontar para memRom[regA]
                 }
                 break;
             case "101":
                 if(this.temp!=0){
                     this.jumpString = "JNE rom[A]";
-                    setPc(getRegA()); //Se (comp!=0) então PC passa apontar para memRom[regA]
+                    setPc(getRegA()-1); //Se (comp!=0) então PC passa apontar para memRom[regA]
                 }
                 break;
             case "110":
                 if(this.temp<=0){
                     this.jumpString = "JLE rom[A]";
-                    setPc(getRegA()); //Se (comp><=0) então PC passa apontar para memRom[regA]
+                    setPc(getRegA()-1); //Se (comp><=0) então PC passa apontar para memRom[regA]
                 }
                 break;
             case "111":
                 this.jumpString = "JMP rom[A]";
-                setPc(getRegA()); //PC passa apontar para instrução que está na memRom[regA]
+                setPc(getRegA()-1); //PC passa apontar para instrução que está na memRom[regA]
                 break;
         }
 
