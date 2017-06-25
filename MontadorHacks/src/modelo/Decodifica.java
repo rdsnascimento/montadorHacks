@@ -55,7 +55,7 @@ public class Decodifica extends RegMem {
                     break;
                 } else {
                     this.temp = getMemDados(); //Valor de memória no temp
-                    this.operacao = "M";
+                    this.operacao = "M[A]";
                     break;
                 }
 
@@ -73,7 +73,7 @@ public class Decodifica extends RegMem {
                     break;
                 } else {
                     this.temp = (short) ~getMemDados(); //!M (nega bit a bit) 
-                    this.operacao = "!M";
+                    this.operacao = "!M[A]";
                     break;
                 }
 
@@ -91,7 +91,7 @@ public class Decodifica extends RegMem {
                     break;
                 } else {
                     this.temp = (short) (0 - getMemDados()); //-M
-                    this.operacao = "-M";
+                    this.operacao = "-M[A]";
                     break;
                 }
 
@@ -109,7 +109,7 @@ public class Decodifica extends RegMem {
                     break;
                 } else {
                     this.temp = (short) ((short) getMemDados() + 1); //M++
-                    this.operacao = "M+1";
+                    this.operacao = "M[A]+1";
                     break;
                 }
 
@@ -127,7 +127,7 @@ public class Decodifica extends RegMem {
                     break;
                 } else {
                     this.temp = (short) ((short) getMemDados() - 1); //M--
-                    this.operacao = "M-1";
+                    this.operacao = "M[A]-1";
                     break;
                 }
 
@@ -138,7 +138,7 @@ public class Decodifica extends RegMem {
                     break;
                 } else {
                     this.temp = (short) (getRegD() + (short) getMemDados()); //D+M                }
-                    this.operacao = "D+M";
+                    this.operacao = "D+M[A]";
                     break;
                 }
 
@@ -149,7 +149,7 @@ public class Decodifica extends RegMem {
                     break;
                 } else {
                     this.temp = (short) (getRegD() - (short) getMemDados()); //D-M
-                    this.operacao = "D-M";
+                    this.operacao = "D-M[A]";
                     break;
                 }
 
@@ -160,7 +160,7 @@ public class Decodifica extends RegMem {
                     break;
                 } else {
                     this.temp = (short) ((short) getMemDados() - getRegD()); //M-D
-                    this.operacao = "M-D";
+                    this.operacao = "M[A]-D";
                     break;
                 }
 
@@ -171,7 +171,7 @@ public class Decodifica extends RegMem {
                     break;
                 } else {
                     this.temp = (short) (getRegD() & (short) getMemDados()); //D and M
-                    this.operacao = "D&M";
+                    this.operacao = "D&M[A]";
                     break;
                 }
 
@@ -182,7 +182,7 @@ public class Decodifica extends RegMem {
                     break;
                 } else {
                     this.temp = (short) (getRegD() | (short) getMemDados()); //D or M
-                    this.operacao = "D|M";
+                    this.operacao = "D|M[A]";
                     break;
                 }
 
@@ -194,10 +194,10 @@ public class Decodifica extends RegMem {
         //Switch para descobrir o destino dos registradores ou do valor da memória
         switch (dest) {
             case "000":
-                this.destino="NULL";
+                this.destino="null";
                 break; //null
             case "001": //Memória <- temp
-                this.destino="M";
+                this.destino="M[A]";
                 setMemDados(this.temp);
                 break;
             case "010": //Registrador D <- temp
@@ -237,46 +237,46 @@ public class Decodifica extends RegMem {
         //Switch para saber se tem JUMP e pra onde pular
         switch(jump){
             case "000":
-                this.jumpString = "NULL";
+                this.jumpString = "null";
                 break; //NULL
             case "001": 
                 if(this.temp>0){ //this.temp é o atributo que contém o valor decodificado pelos bits de comp
-                    this.jumpString = "JGT";
+                    this.jumpString = "JGT rom[A]";
                     setPc(getRegA()); //Se (comp>0) então PC passa apontar para memRom[regA]. MEMÓRIA ROM é a MEMÓRIA QUE CONTÉM AS INTRUÇÕES. 
                 }
                 break;
             case "010":
                 if(this.temp==0){
-                    this.jumpString = "JEQ";
+                    this.jumpString = "JEQ rom[A]";
                     setPc(getRegA()); //Se (comp==0) então PC passa apontar para memRom[regA]
                 }
                 break;
             case "011":
                 if(this.temp>=0){
-                    this.jumpString = "JGE";
+                    this.jumpString = "JGE rom[A]";
                     setPc(getRegA()); //Se (comp>=0) então PC passa apontar para memRom[regA]
                 }
                 break;
             case "100":
                 if(this.temp<0){ 
-                    this.jumpString = "JLT";
+                    this.jumpString = "JLT rom[A]";
                     setPc(getRegA()); //Se (comp<0) então PC passa apontar para memRom[regA]
                 }
                 break;
             case "101":
                 if(this.temp!=0){
-                    this.jumpString = "JNE";
+                    this.jumpString = "JNE rom[A]";
                     setPc(getRegA()); //Se (comp!=0) então PC passa apontar para memRom[regA]
                 }
                 break;
             case "110":
                 if(this.temp<=0){
-                    this.jumpString = "JLE";
+                    this.jumpString = "JLE rom[A]";
                     setPc(getRegA()); //Se (comp><=0) então PC passa apontar para memRom[regA]
                 }
                 break;
             case "111":
-                this.jumpString = "Jump";
+                this.jumpString = "JMP rom[A]";
                 setPc(getRegA()); //PC passa apontar para instrução que está na memRom[regA]
                 break;
         }
@@ -285,7 +285,9 @@ public class Decodifica extends RegMem {
     
     //Coloca valor imediato no Registrador A
     public void decAssembler(short a){
-        this.operacao = "A=valor";  //Registrador A recebe imediato
+        this.operacao = Integer.toString(a); //Registrador A recebe imediato
+        this.destino = "A";
+        this.jumpString = "null";
         setRegA(a);
     }
     
