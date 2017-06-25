@@ -291,7 +291,7 @@ public class Decodifica extends RegMem {
         setRegA(a);
     }
     
-    //Desenvolve qual o tipo de operação está fazendo.
+    //Devolve qual o tipo de operação está fazendo.
     public String operacao(){
         return this.operacao;
     }
