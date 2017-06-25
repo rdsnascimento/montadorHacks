@@ -236,10 +236,11 @@ public class Decodifica extends RegMem {
             case "000":
                 this.jumpString = "null";
                 break; //NULL
-            case "001":  //setPc(getRegA()-1). Esse -1 é porque pc é incrementado logo a seguir de quando é chamado esse setPc. Então -1+1=0.
+            case "001":  
                 if(this.temp>0){ //this.temp é o atributo que contém o valor decodificado pelos bits de comp
                     this.jumpString = "JGT rom[A]";
                     setPc(getRegA()-1); //Se (comp>0) então PC passa apontar para memRom[regA]. MEMÓRIA ROM é a MEMÓRIA QUE CONTÉM AS INTRUÇÕES. 
+                    //setPc(getRegA()-1). Esse -1 é porque pc é sempre incrementado logo a seguir de quando é chamado esse setPc. Então -1+1=0.
                 }
                 break;
             case "010":
