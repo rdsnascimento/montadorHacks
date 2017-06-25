@@ -60,16 +60,6 @@ public class RegMem {
 //        setIndice(getIndice() + 1); //indice++
 //    }
 
-    /**
-     * Getter e Setter Indice Memória de Dados
-     */
-    public int getIndice() {
-        return RegMem.indice;
-    }
-
-    public void setIndice(int valor) {
-        RegMem.indice = valor;
-    }
     
     /**
      * Getter e Setter PC ROM
@@ -97,4 +87,5 @@ public class RegMem {
         memROM[pc] = valor; //
         setPc(getPc()+1); //Pc++
     }
+    
 }

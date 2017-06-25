@@ -5,6 +5,8 @@
  */
 package modelo;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Rafael
@@ -12,12 +14,14 @@ package modelo;
 public class Decodifica extends RegMem {
 
     private short temp; //variável temporária que recebe o valor a ser colocado no registrador ou na memória;
-    private String operacao;
-    private String destino;
-    private String jumpString;
+    static String operacao;
+    static String destino;
+    static String jumpString;
+ 
 
     public void decAssembler(String a, String comp, String dest, String jump) {
         //Switch baseado nos Bits do Comp
+      
         switch (comp) {
             case "101010":
                 if ("0".equals(a)) {

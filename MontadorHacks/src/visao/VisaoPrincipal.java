@@ -24,6 +24,15 @@ public class VisaoPrincipal extends javax.swing.JFrame {
     ArrayList dados;
     ModeloTabela mtMemoria;
     ModeloTabela mtInstrucoes;
+    int programCont;
+
+    public int getProgramCont() {
+        return programCont;
+    }
+
+    public void setProgramCont(int programCont) {
+        this.programCont = programCont;
+    }
     /**
      * Creates new form VisaoPrincipal
      */
@@ -40,12 +49,19 @@ public class VisaoPrincipal extends javax.swing.JFrame {
         jTextFieldRegA.setEditable(false);
         jTextFieldRegD.setEditable(false);
     }
-   
+    
+    public void setAreaSaida(String text){
+        jTextAreaSaida.setText(jTextAreaSaida.getText() + text + "\n----------------------------------------------------------------------------------\n");
+    }
+    
     public void setRegistrador(String regA, String regD){
         jTextFieldRegA.setText(regA);
         jTextFieldRegD.setText(regD);
     }
     
+    public void setPC(String text){
+        jTextFieldPC.setText(text);
+    }
     public void setMemoria(String valor, int linha, int coluna){
         mtMemoria.setValueAt(valor, linha, coluna+1);
         repaint();
@@ -81,20 +97,24 @@ public class VisaoPrincipal extends javax.swing.JFrame {
     
     public void preencherTabelaInstrucoes(){
         ArrayList instDados = new ArrayList();
-        String[] instColunas = new String[] {"Endereço", "Código", "Fonte"};
+        String[] instColunas = new String[] {"Rom", "Instruções", "Dest", "Comp", "Jump"};
         mtInstrucoes = new ModeloTabela(instDados, instColunas);
         
         for(int i=0;i<50;i++){
-            instDados.add(new String[]{" ", " ", " "});
+            instDados.add(new String[]{Integer.toString(i), " ", " ", " ", " "});
         }
         jTableInstrucoes.setModel(mtInstrucoes);
-        jTableInstrucoes.getColumnModel().getColumn(0).setPreferredWidth(90);
-        jTableInstrucoes.getColumnModel().getColumn(1).setPreferredWidth(90);
-        jTableInstrucoes.getColumnModel().getColumn(2).setPreferredWidth(210);
+        jTableInstrucoes.getColumnModel().getColumn(0).setPreferredWidth(40);
+        jTableInstrucoes.getColumnModel().getColumn(1).setPreferredWidth(150);
+        jTableInstrucoes.getColumnModel().getColumn(2).setPreferredWidth(90);
+        jTableInstrucoes.getColumnModel().getColumn(3).setPreferredWidth(90);
+        jTableInstrucoes.getColumnModel().getColumn(4).setPreferredWidth(98);
        
         jTableInstrucoes.getColumnModel().getColumn(0).setResizable(false);
         jTableInstrucoes.getColumnModel().getColumn(1).setResizable(false);   
         jTableInstrucoes.getColumnModel().getColumn(2).setResizable(false);
+        jTableInstrucoes.getColumnModel().getColumn(3).setResizable(false);
+        jTableInstrucoes.getColumnModel().getColumn(4).setResizable(false);
         
         jTableInstrucoes.getTableHeader().setReorderingAllowed(false);
         jTableInstrucoes.setAutoResizeMode(jTableMemoria.AUTO_RESIZE_OFF);
@@ -118,14 +138,17 @@ public class VisaoPrincipal extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jTextFieldRegA = new javax.swing.JTextField();
         jTextFieldRegD = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jTextFieldPC = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTableInstrucoes = new javax.swing.JTable();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
+        jButtonAnterior = new javax.swing.JButton();
+        jButtonProximo = new javax.swing.JButton();
+        jButtonPrimeiro = new javax.swing.JButton();
+        jButtonUltimo = new javax.swing.JButton();
+        jButtonPorInstrucao = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -167,27 +190,39 @@ public class VisaoPrincipal extends javax.swing.JFrame {
 
         jTextFieldRegD.setFont(new java.awt.Font("Cantarell", 0, 18)); // NOI18N
 
+        jLabel10.setFont(new java.awt.Font("Cantarell", 1, 24)); // NOI18N
+        jLabel10.setText("PC");
+
+        jTextFieldPC.setFont(new java.awt.Font("Cantarell", 0, 24)); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(97, 97, 97))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jTextFieldRegA, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
-                                .addComponent(jTextFieldRegD)))
-                        .addGap(64, 64, 64))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(97, 97, 97))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jTextFieldRegA, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE)
+                                        .addComponent(jTextFieldRegD)))
+                                .addGap(64, 64, 64))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldPC, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -206,6 +241,10 @@ public class VisaoPrincipal extends javax.swing.JFrame {
                         .addComponent(jTextFieldRegA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jTextFieldRegD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(jTextFieldPC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -232,35 +271,68 @@ public class VisaoPrincipal extends javax.swing.JFrame {
             jTableInstrucoes.getColumnModel().getColumn(1).setPreferredWidth(6);
         }
 
-        jButton3.setText("Anterior");
+        jButtonAnterior.setText("Anterior");
+        jButtonAnterior.setEnabled(false);
+        jButtonAnterior.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAnteriorActionPerformed(evt);
+            }
+        });
 
-        jButton4.setText("Próximo");
+        jButtonProximo.setText("Próximo");
+        jButtonProximo.setEnabled(false);
+        jButtonProximo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonProximoActionPerformed(evt);
+            }
+        });
 
-        jButton5.setText("Primeiro");
+        jButtonPrimeiro.setText("Primeiro");
+        jButtonPrimeiro.setEnabled(false);
+        jButtonPrimeiro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPrimeiroActionPerformed(evt);
+            }
+        });
 
-        jButton6.setText("Último");
+        jButtonUltimo.setText("Último");
+        jButtonUltimo.setEnabled(false);
+        jButtonUltimo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonUltimoActionPerformed(evt);
+            }
+        });
+
+        jButtonPorInstrucao.setText("Por instrução");
+        jButtonPorInstrucao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPorInstrucaoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jButton5)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton4))))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(150, 150, 150)
-                        .addComponent(jLabel5)))
+                        .addComponent(jButtonPrimeiro)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonUltimo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonAnterior)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonProximo)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonPorInstrucao, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(188, 188, 188)
+                .addComponent(jLabel5)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -272,11 +344,12 @@ public class VisaoPrincipal extends javax.swing.JFrame {
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5)
-                    .addComponent(jButton6))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButtonAnterior)
+                    .addComponent(jButtonProximo)
+                    .addComponent(jButtonPrimeiro)
+                    .addComponent(jButtonUltimo)
+                    .addComponent(jButtonPorInstrucao))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -359,7 +432,7 @@ public class VisaoPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -382,20 +455,20 @@ public class VisaoPrincipal extends javax.swing.JFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(173, 173, 173)
+                .addContainerGap()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(172, 172, 172)
                 .addComponent(jLabel8)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane4)
-                .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(10, 10, 10)
                 .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -452,9 +525,9 @@ public class VisaoPrincipal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -466,15 +539,16 @@ public class VisaoPrincipal extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(25, Short.MAX_VALUE)
+                .addContainerGap(16, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -484,8 +558,36 @@ public class VisaoPrincipal extends javax.swing.JFrame {
 
     private void jButtonLerArquivoPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLerArquivoPrincipalActionPerformed
         cvp.lerArquivoPrincipal(jTextFieldLerArquivo.getText());
-        jTextAreaSaida.setText("Arquivo lido.\n------------------------------------\n");
+        
     }//GEN-LAST:event_jButtonLerArquivoPrincipalActionPerformed
+
+    private void jButtonPorInstrucaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPorInstrucaoActionPerformed
+        jButtonAnterior.setEnabled(true);
+        jButtonPrimeiro.setEnabled(true);
+        jButtonProximo.setEnabled(true);
+        jButtonUltimo.setEnabled(true);
+        
+        jTableInstrucoes.setRowSelectionInterval(0, 0);
+    }//GEN-LAST:event_jButtonPorInstrucaoActionPerformed
+
+    private void jButtonPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPrimeiroActionPerformed
+        jTableInstrucoes.setRowSelectionInterval(0, 0);
+    }//GEN-LAST:event_jButtonPrimeiroActionPerformed
+
+    private void jButtonUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUltimoActionPerformed
+        jTableInstrucoes.setRowSelectionInterval(getProgramCont()-1, getProgramCont()-1);
+    }//GEN-LAST:event_jButtonUltimoActionPerformed
+
+    private void jButtonAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnteriorActionPerformed
+        if(jTableInstrucoes.getSelectedRow() > 0)
+            jTableInstrucoes.setRowSelectionInterval(jTableInstrucoes.getSelectedRow()-1, jTableInstrucoes.getSelectedRow()-1);
+    }//GEN-LAST:event_jButtonAnteriorActionPerformed
+
+    private void jButtonProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProximoActionPerformed
+        if(jTableInstrucoes.getSelectedRow() < getProgramCont()-1)
+            jTableInstrucoes.setRowSelectionInterval(jTableInstrucoes.getSelectedRow()+1, jTableInstrucoes.getSelectedRow()+1);
+        
+    }//GEN-LAST:event_jButtonProximoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -525,12 +627,14 @@ public class VisaoPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButtonAnterior;
     private javax.swing.JButton jButtonLerArquivoPrincipal;
+    private javax.swing.JButton jButtonPorInstrucao;
+    private javax.swing.JButton jButtonPrimeiro;
+    private javax.swing.JButton jButtonProximo;
+    private javax.swing.JButton jButtonUltimo;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -555,6 +659,7 @@ public class VisaoPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextAreaSaida;
     private javax.swing.JTextField jTextFieldLerArquivo;
+    private javax.swing.JTextField jTextFieldPC;
     private javax.swing.JTextField jTextFieldRegA;
     private javax.swing.JTextField jTextFieldRegD;
     // End of variables declaration//GEN-END:variables

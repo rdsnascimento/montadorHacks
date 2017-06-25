@@ -23,6 +23,7 @@ public class ControleVisaoPrincipal {
     RegMem dados;
     VisaoPrincipal vp;
     ModeloTabela mt;
+    int contadorMemoria=0;
     
     public ControleVisaoPrincipal(VisaoPrincipal vp){
         this.vp = vp;
@@ -32,21 +33,40 @@ public class ControleVisaoPrincipal {
         leitor = new Leitura();
         try {
             leitor.lerEntrada(arq);
+            vp.setAreaSaida("Arquivo lido com sucesso.");
         } catch (FileNotFoundException e) {
-            JOptionPane.showMessageDialog(null, "Arquivo não encontrado.");
+            vp.setAreaSaida("Arquivo não encontrado.\nErro: " + e.getMessage());
         }
         
-        dados = new RegMem();
-        vp.setRegistrador(Short.toString(dados.getRegA()), Short.toString(dados.getRegD()));
+        /*dados = new RegMem();
+        vp.setRegistrador(Short.toString(dados.getRegA()), Short.toString(dados.getRegD()));*/
         
-        for(int i=0;i<dados.getIndice();i++){
-            vp.setMemoria(Short.toString(dados.getMemDados(i)),linhaProgCont(i),colunaProgCont(i));
-            vp.setInstrucoes(Integer.toString(i), i, 0);
-            vp.setInstrucoes("A+D", i, 1);
-            vp.setInstrucoes("Apenas exemplo", i, 2);
+        RegMem exec = new RegMem();
+        
+
+        exec.setPc(0); //zerando o Pc
+        while (exec.getMemROM(exec.getPc()) != null) { //while (memRom[pc] != null)
+            leitor.romToDecod(exec.getMemROM(exec.getPc())); //romToDecod (memRom[pc]) ou seja mandando cada instrução da rom pra decodificação
+            vp.setInstrucoes(Integer.toString(exec.getPc()), exec.getPc(), 0);
+            vp.setInstrucoes(exec.getMemROM(exec.getPc()), exec.getPc(), 1);            
+            vp.setInstrucoes(leitor.destino(), exec.getPc(), 2);       
+            vp.setInstrucoes(leitor.operacao(), exec.getPc(), 3);        
+            vp.setInstrucoes(leitor.jump(), exec.getPc(), 4);
+            vp.setRegistrador(Short.toString(exec.getRegA()), Short.toString(exec.getRegD()));
+           
+            vp.setPC(Integer.toString(exec.getPc()));
+            exec.setPc(exec.getPc() + 1); //pc++
+            vp.setProgramCont(exec.getPc());
             
         }
-        
+        for(int i=0;i<exec.getPc();i++){
+            vp.setMemoria(Short.toString(exec.getMemDados(i)), linhaProgCont(getContadorMemoria()), colunaProgCont(getContadorMemoria()));
+            setContadorMemoria(getContadorMemoria()+1);
+        }
+   
+
+      
+
         
     }
    
@@ -61,6 +81,14 @@ public class ControleVisaoPrincipal {
     
     public int colunaProgCont(int progCont){
         return progCont%10;
+    }
+    
+    private int getContadorMemoria(){
+        return contadorMemoria;
+    }
+    
+    private void setContadorMemoria(int contadorMemoria){
+        this.contadorMemoria = contadorMemoria;
     }
     
 }

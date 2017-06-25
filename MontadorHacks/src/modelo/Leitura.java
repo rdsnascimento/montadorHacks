@@ -40,7 +40,7 @@ public class Leitura extends Decodifica { // importa metodos do decodifica
 
                     auxLeitura.setMemROM(receptor); // passa string inteira para rom
 
-                    System.out.println("instrução adicionada a memória rom ..\n"); // Flag para avisar se instrução foi passada para rom comentar para não exibir
+                    //System.out.println("instrução adicionada a memória rom ..\n"); // Flag para avisar se instrução foi passada para rom comentar para não exibir
 
                 } catch (Exception e) {
                     System.out.println(e.getMessage()); // captura exceção em caso de instrução não estiver de acordo com arquitetura e le a proxima
@@ -79,11 +79,11 @@ public class Leitura extends Decodifica { // importa metodos do decodifica
                 a += aux[i];
             }
 
-            System.out.println(a);
+            //System.out.println(a);
 
             short adress = (short) Integer.parseInt(a, 2); // converte binario (do tipo string) para inteiro e usa cast para short
 
-            System.out.println(adress); // imprime valor imediato
+           // System.out.println(adress); // imprime valor imediato
             auxLeitura.decAssembler(adress); // se for do tipo 0, passa valor decimal para decAssembler
 
         } else if (tipo == 1) { // Se for do tipo 1, faz a separação dos bits conforme arquitetura
@@ -92,7 +92,7 @@ public class Leitura extends Decodifica { // importa metodos do decodifica
 
             a += aux[0]; // copiar para string a respectivos bits
 
-            System.out.println(a); // Exibe os bits na saída padrão, comentar para não exibir
+         //   System.out.println(a); // Exibe os bits na saída padrão, comentar para não exibir
 
             for (int i = 0, j = 4; j < 10; i++, j++) {
 
@@ -107,7 +107,7 @@ public class Leitura extends Decodifica { // importa metodos do decodifica
             comp += aux[4];
             comp += aux[5];
 
-            System.out.println(comp); // exibe comp na saida padrão, comentar para não exibir
+            //System.out.println(comp); // exibe comp na saida padrão, comentar para não exibir
 
             for (int i = 0, j = 10; j < 13; i++, j++) {
 
@@ -119,7 +119,7 @@ public class Leitura extends Decodifica { // importa metodos do decodifica
             dest += aux[1];
             dest += aux[2];
 
-            System.out.println(dest); // exibe dest, comentar para não exibir
+            //System.out.println(dest); // exibe dest, comentar para não exibir
 
             for (int i = 0, j = 13; j < 16; i++, j++) {
 
@@ -131,13 +131,13 @@ public class Leitura extends Decodifica { // importa metodos do decodifica
             jump += aux[1];
             jump += aux[2];
 
-            System.out.println(jump); // exibe jump, comentar para não exibir
+           // System.out.println(jump); // exibe jump, comentar para não exibir
 
             auxLeitura.decAssembler(a, comp, dest, jump); // passa bits separados conforme arquitetura para decAssembler
 
         }
 
-        System.out.println("Passagem de bits para dec ok!"); // exibe flag para informar que passagem e separação de bits foi ok // comentar para não exibir
+       // System.out.println("Passagem de bits para dec ok!"); // exibe flag para informar que passagem e separação de bits foi ok // comentar para não exibir
 
     }
 
@@ -175,6 +175,7 @@ public class Leitura extends Decodifica { // importa metodos do decodifica
             return 2;
         }
     }
+    
 
     /*public static void main(String[] args){ // metodo main para teste
         
