@@ -46,9 +46,11 @@ public class ControleVisaoPrincipal {
 
         exec.setPc(0); //zerando o Pc
         while (exec.getMemROM(exec.getPc()) != null) { //while (memRom[pc] != null)
-            leitor.romToDecod(exec.getMemROM(exec.getPc())); //romToDecod (memRom[pc]) ou seja mandando cada instrução da rom pra decodificação
             vp.setInstrucoes(Integer.toString(exec.getPc()), exec.getPc(), 0);
-            vp.setInstrucoes(exec.getMemROM(exec.getPc()), exec.getPc(), 1);            
+            vp.setInstrucoes(exec.getMemROM(exec.getPc()), exec.getPc(), 1);       
+      
+            leitor.romToDecod(exec.getMemROM(exec.getPc())); //romToDecod (memRom[pc]) ou seja mandando cada instrução da rom pra decodificação
+           
             vp.setInstrucoes(leitor.destino(), exec.getPc(), 2);       
             vp.setInstrucoes(leitor.operacao(), exec.getPc(), 3);        
             vp.setInstrucoes(leitor.jump(), exec.getPc(), 4);
