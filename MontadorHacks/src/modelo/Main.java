@@ -28,12 +28,11 @@ public class Main {
         exec.setPc(0); //zerando o Pc
         System.out.println("Verificando erros:");
         while (exec.getMemROM(exec.getPc()) != null) { //while (memRom[pc] != null)
-            
+            System.out.println(exec.getMemROM(exec.getPc()));
             leitor.romToDecod(exec.getMemROM(exec.getPc())); //romToDecod (memRom[pc]) ou seja mandando cada instrução da rom pra decodificação
-            System.out.println(exec.getMemROM(exec.getPc())+"\nComp: "+leitor.operacao()+"\nDestino: "+leitor.destino()+"\nJump: "+leitor.jump());
+            System.out.println("Comp: "+leitor.operacao()+"\nDestino: "+leitor.destino()+"\nJump: "+leitor.jump());
             System.out.println("\n");
-            exec.setPc(exec.getPc() + 1); //pc++
-            
+            exec.setPc(exec.getPc() + 1); //pc++ 
         }
 
         System.out.println("\nImprimindo:");
