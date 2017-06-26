@@ -14,9 +14,15 @@ import javax.swing.JOptionPane;
 public class Decodifica extends RegMem {
 
     private short temp; //variável temporária que recebe o valor a ser colocado no registrador ou na memória;
-    static String operacao;
-    static String destino;
-    static String jumpString;
+    private static String operacao;
+    private static String destino;
+    private static String jumpString;
+    private static boolean incrementa;
+
+    
+
+    
+    
  
 
     public void decAssembler(String a, String comp, String dest, String jump) {
@@ -242,44 +248,50 @@ public class Decodifica extends RegMem {
                 break; //NULL
             case "001":  
                 if(this.temp>0){ //this.temp é o atributo que contém o valor decodificado pelos bits de comp
-                    setPc(getRegA()-1); //Se (comp>0) então PC passa apontar para memRom[regA]. MEMÓRIA ROM é a MEMÓRIA QUE CONTÉM AS INTRUÇÕES. 
-                    //setPc(getRegA()-1). Esse -1 é porque pc é sempre incrementado logo a seguir de quando é chamado esse setPc. Então -1+1=0.
+                    setPc(getRegA()); //Se (comp>0) então PC passa apontar para memRom[regA]. MEMÓRIA ROM é a MEMÓRIA QUE CONTÉM AS INTRUÇÕES. 
+                    incrementa=false;
                 }
                 jumpString = "JGT rom[A]";
                 break;
             case "010":
                 if(this.temp==0){
-                    setPc(getRegA()-1); //Se (comp==0) então PC passa apontar para memRom[regA]
+                    setPc(getRegA()); //Se (comp==0) então PC passa apontar para memRom[regA]
+                    incrementa=false;
                 }
                 jumpString = "JEQ rom[A]";
                 break;
             case "011":
                 if(this.temp>=0){
                     setPc(getRegA()-1); //Se (comp>=0) então PC passa apontar para memRom[regA]
+                    incrementa=false;
                 }
                 jumpString = "JGE rom[A]";
                 break;
             case "100":
                 if(this.temp<0){ 
-                    setPc(getRegA()-1); //Se (comp<0) então PC passa apontar para memRom[regA]
+                    setPc(getRegA()); //Se (comp<0) então PC passa apontar para memRom[regA]
+                    incrementa=false;
                 }
                 jumpString = "JLT rom[A]";
                 break;
             case "101":
                 if(this.temp!=0){
-                    setPc(getRegA()-1); //Se (comp!=0) então PC passa apontar para memRom[regA]
+                    setPc(getRegA()); //Se (comp!=0) então PC passa apontar para memRom[regA]
+                    incrementa=false;
                 }
                 jumpString = "JNE rom[A]";
                 break;
             case "110":
                 if(this.temp<=0){
-                    setPc(getRegA()-1); //Se (comp><=0) então PC passa apontar para memRom[regA]
+                    setPc(getRegA()); //Se (comp><=0) então PC passa apontar para memRom[regA]
+                    incrementa=false;
                 }
                 jumpString = "JLE rom[A]";
                 break;
             case "111":
-                setPc(getRegA()-1); //PC passa apontar para instrução que está na memRom[regA]
+                setPc(getRegA()); //PC passa apontar para instrução que está na memRom[regA]
                 jumpString = "JMP rom[A]";
+                incrementa=false;
                 break;
         }
 
@@ -304,5 +316,13 @@ public class Decodifica extends RegMem {
     
     public String jump(){
         return jumpString;
+    }
+    
+    public boolean getIncrementa() {
+        return incrementa;
+    }
+    
+    public void setIncrementa(boolean incrementa) {
+        Decodifica.incrementa = incrementa;
     }
 }

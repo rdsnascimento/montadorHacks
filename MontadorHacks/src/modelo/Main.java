@@ -39,11 +39,14 @@ public class Main {
         exec.setPc(0); //zerando o Pc
         System.out.println("Verificando erros:");
         while (exec.getMemROM(exec.getPc()) != null) { //while (memRom[pc] != null)
-            System.out.print(exec.getPc());
+            System.out.println(exec.getMemROM());
             leitor.romToDecod(exec.getMemROM(exec.getPc())); //romToDecod (memRom[pc]) ou seja mandando cada instrução da rom pra decodificação
-            // System.out.println("Comp: "+leitor.operacao()+"\nDestino: "+leitor.destino()+"\nJump: "+leitor.jump()+"\n");
-            System.out.println(" getMenRom = " + exec.getMemROM(exec.getPc()));
-            exec.setPc(exec.getPc() + 1); //pc++ 
+            System.out.println("Comp: "+leitor.operacao()+"\nDestino: "+leitor.destino()+"\nJump: "+leitor.jump()+"\n");
+//            System.out.println(" getMenRom = " + exec.getMemROM(exec.getPc()));
+            if (leitor.getIncrementa()!=false){
+                exec.setPc(exec.getPc() + 1); //pc++ 
+            }
+            leitor.setIncrementa(true);
         }
         System.out.println("Program Count: "+exec.getPc());
 

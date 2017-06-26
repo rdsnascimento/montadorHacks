@@ -57,7 +57,11 @@ public class ControleVisaoPrincipal {
             vp.setRegistrador(Short.toString(exec.getRegA()), Short.toString(exec.getRegD()));
           // JOptionPane.showMessageDialog(null, exec.getPc() + " " + leitor.jump());
             vp.setPC(Integer.toString(exec.getPc()));
-            exec.setPc(exec.getPc() + 1); //pc++
+            
+            if (leitor.getIncrementa()!=false){
+                exec.setPc(exec.getPc() + 1); //pc++
+            }
+            leitor.setIncrementa(true);
             vp.setProgramCont(exec.getPc());
             
             
