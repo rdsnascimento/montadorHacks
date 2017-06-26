@@ -17,17 +17,11 @@ public class Decodifica extends RegMem {
     private static String operacao;
     private static String destino;
     private static String jumpString;
-    private static boolean incrementa;
-
-    
-
-    
-    
- 
+    private static boolean incrementaPC;
 
     public void decAssembler(String a, String comp, String dest, String jump) {
         //Switch baseado nos Bits do Comp
-      
+
         switch (comp) {
             case "101010":
                 if ("0".equals(a)) {
@@ -47,7 +41,7 @@ public class Decodifica extends RegMem {
                 if ("0".equals(a)) {
                     this.temp = -1; //-1 no temp
                     operacao = "-1";
-                    
+
                 }
                 break;
 
@@ -204,125 +198,118 @@ public class Decodifica extends RegMem {
         //Switch para descobrir o destino dos registradores ou do valor da memória
         switch (dest) {
             case "000":
-                destino="null";
+                destino = "null";
                 break; //null
             case "001": //Memória <- temp
-                destino="M[A]";
+                destino = "M[A]";
                 setMemDados(this.temp);
                 break;
             case "010": //Registrador D <- temp
-                destino="D";
+                destino = "D";
                 setRegD(this.temp);
                 break;
             case "011": //Memória e Registrador D <- temp
-                destino="MD";
+                destino = "MD";
                 setMemDados(this.temp);
                 setRegD(this.temp);
                 break;
             case "100": //Registrador A <- temp
-                destino="A";
+                destino = "A";
                 setRegA(this.temp);
                 break;
             case "101": //Registrador A e Memória <- temp
-                destino="AM";
+                destino = "AM";
                 setMemDados(this.temp);
                 setRegA(this.temp);
                 break;
             case "110": //Registrador A e Registrador D <- temp
-                destino="AD";
+                destino = "AD";
                 setRegA(this.temp);
                 setRegD(this.temp);
                 break;
             case "111": //Registrador A, Registrador D e Memória <- temp
-                destino="AMD";
+                destino = "AMD";
                 setRegA(this.temp);
                 setRegD(this.temp);
                 setMemDados(this.temp);
                 break;
         }
-        
+
         //Switch para saber se tem JUMP e pra onde pular
-        switch(jump){
+        switch (jump) {
             case "000":
                 jumpString = "null";
                 break; //NULL
-            case "001":  
-                if(this.temp>0){ //this.temp é o atributo que contém o valor decodificado pelos bits de comp
-                    setPc(getRegA()); //Se (comp>0) então PC passa apontar para memRom[regA]. MEMÓRIA ROM é a MEMÓRIA QUE CONTÉM AS INTRUÇÕES. 
-                    incrementa=false;
+            case "001":
+                if (this.temp > 0) { //this.temp é o atributo que contém o valor decodificado pelos bits de comp
+                    incrementaPC = false;
                 }
                 jumpString = "JGT rom[A]";
                 break;
             case "010":
-                if(this.temp==0){
-                    setPc(getRegA()); //Se (comp==0) então PC passa apontar para memRom[regA]
-                    incrementa=false;
+                if (this.temp == 0) {
+                    incrementaPC = false;
                 }
                 jumpString = "JEQ rom[A]";
                 break;
             case "011":
-                if(this.temp>=0){
-                    setPc(getRegA()); //Se (comp>=0) então PC passa apontar para memRom[regA]
-                    incrementa=false;
+                if (this.temp >= 0) {
+                    incrementaPC = false;
                 }
                 jumpString = "JGE rom[A]";
                 break;
             case "100":
-                if(this.temp<0){ 
-                    setPc(getRegA()); //Se (comp<0) então PC passa apontar para memRom[regA]
-                    incrementa=false;
+                if (this.temp < 0) {
+                    incrementaPC = false;
                 }
                 jumpString = "JLT rom[A]";
                 break;
             case "101":
-                if(this.temp!=0){
-                    setPc(getRegA()); //Se (comp!=0) então PC passa apontar para memRom[regA]
-                    incrementa=false;
+                if (this.temp != 0) {
+                    incrementaPC = false;
                 }
                 jumpString = "JNE rom[A]";
                 break;
             case "110":
-                if(this.temp<=0){
-                    setPc(getRegA()); //Se (comp><=0) então PC passa apontar para memRom[regA]
-                    incrementa=false;
+                if (this.temp <= 0) {
+                    incrementaPC = false;
                 }
                 jumpString = "JLE rom[A]";
                 break;
             case "111":
-                setPc(getRegA()); //PC passa apontar para instrução que está na memRom[regA]
                 jumpString = "JMP rom[A]";
-                incrementa=false;
+                incrementaPC = false;
                 break;
         }
 
     }
-    
+
     //Coloca valor imediato no Registrador A
-    public void decAssembler(short a){
+    public void decAssembler(short a) {
         operacao = Integer.toString(a);
         destino = "A";
         jumpString = "null";
         setRegA(a);
     }
-    
+
     //Devolve qual o tipo de operação está fazendo.
-    public String operacao(){
+    public String operacao() {
         return operacao;
     }
-    
-    public String destino(){
+
+    public String destino() {
         return destino;
     }
-    
-    public String jump(){
+
+    public String jump() {
         return jumpString;
     }
-    
+
     public boolean getIncrementa() {
-        return incrementa;
+        return incrementaPC;
     }
-    
-    public void setIncrementa(boolean incrementa) {
-        Decodifica.incrementa = incrementa;
+
+    public void setIncrementaPC(boolean incrementaPC) {
+        Decodifica.incrementaPC = incrementaPC;
     }
 }

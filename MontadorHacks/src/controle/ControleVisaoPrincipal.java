@@ -60,8 +60,11 @@ public class ControleVisaoPrincipal {
             
             if (leitor.getIncrementa()!=false){
                 exec.setPc(exec.getPc() + 1); //pc++
+            }else{
+                exec.setPc(exec.getRegA());
             }
-            leitor.setIncrementa(true);
+            
+            leitor.setIncrementaPC(true);
             vp.setProgramCont(exec.getPc());
             
             
