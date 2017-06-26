@@ -33,6 +33,7 @@ public class Main {
             System.out.println("Comp: "+leitor.operacao()+"\nDestino: "+leitor.destino()+"\nJump: "+leitor.jump()+"\n");
             exec.setPc(exec.getPc() + 1); //pc++ 
         }
+        System.out.println("Program Count: "+exec.getPc());
 
         System.out.println("\nImprimindo:");
         //System.out.println("Registrador D: " + exec.getRegD());
