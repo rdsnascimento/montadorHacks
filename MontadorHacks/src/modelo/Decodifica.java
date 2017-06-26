@@ -262,7 +262,7 @@ public class Decodifica extends RegMem {
                 break;
             case "011":
                 if(this.temp>=0){
-                    setPc(getRegA()-1); //Se (comp>=0) então PC passa apontar para memRom[regA]
+                    setPc(getRegA()); //Se (comp>=0) então PC passa apontar para memRom[regA]
                     incrementa=false;
                 }
                 jumpString = "JGE rom[A]";
