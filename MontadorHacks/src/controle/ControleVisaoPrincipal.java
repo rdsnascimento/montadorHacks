@@ -55,18 +55,20 @@ public class ControleVisaoPrincipal {
             vp.setInstrucoes(leitor.operacao(), exec.getPc(), 3);        
             vp.setInstrucoes(leitor.jump(), exec.getPc(), 4);
             vp.setRegistrador(Short.toString(exec.getRegA()), Short.toString(exec.getRegD()));
-           
+          // JOptionPane.showMessageDialog(null, exec.getPc() + " " + leitor.jump());
             vp.setPC(Integer.toString(exec.getPc()));
             exec.setPc(exec.getPc() + 1); //pc++
             vp.setProgramCont(exec.getPc());
+            
             
         }
         for(int i=0;i<exec.getPc();i++){
             vp.setMemoria(Short.toString(exec.getMemDados(i)), linhaProgCont(getContadorMemoria()), colunaProgCont(getContadorMemoria()));
             setContadorMemoria(getContadorMemoria()+1);
         }
-   
-
+        vp.setPC(Integer.toString(exec.getPc()));
+        exec.setPc(exec.getPc() + 1); //pc++
+        vp.setProgramCont(exec.getPc());
       
 
         
