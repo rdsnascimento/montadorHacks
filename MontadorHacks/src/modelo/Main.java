@@ -25,14 +25,25 @@ public class Main {
 
         RegMem exec = new RegMem();
 
+//        exec.setPc(0); //zerando o Pc
+//        System.out.println("Verificando erros:");
+//        while (exec.getMemROM(exec.getPc()) != null) { //while (memRom[pc] != null)
+//            //System.out.println(exec.getMemROM(exec.getPc()));
+//            leitor.romToDecod(exec.getMemROM(exec.getPc())); //romToDecod (memRom[pc]) ou seja mandando cada instrução da rom pra decodificação
+//           // System.out.println("Comp: "+leitor.operacao()+"\nDestino: "+leitor.destino()+"\nJump: "+leitor.jump()+"\n");
+//           System.out.println(exec.getPc() + " getMenRom = " + exec.getMemROM(exec.getPc())); 
+//           exec.setPc(exec.getPc() + 1); //pc++ 
+//        }
+//        System.out.println("Program Count: "+exec.getPc());
+        
         exec.setPc(0); //zerando o Pc
         System.out.println("Verificando erros:");
         while (exec.getMemROM(exec.getPc()) != null) { //while (memRom[pc] != null)
-            //System.out.println(exec.getMemROM(exec.getPc()));
+            System.out.print(exec.getPc());
             leitor.romToDecod(exec.getMemROM(exec.getPc())); //romToDecod (memRom[pc]) ou seja mandando cada instrução da rom pra decodificação
-           // System.out.println("Comp: "+leitor.operacao()+"\nDestino: "+leitor.destino()+"\nJump: "+leitor.jump()+"\n");
-           System.out.println(exec.getPc() + " getMenRom = " + exec.getMemROM(exec.getPc())); 
-           exec.setPc(exec.getPc() + 1); //pc++ 
+            // System.out.println("Comp: "+leitor.operacao()+"\nDestino: "+leitor.destino()+"\nJump: "+leitor.jump()+"\n");
+            System.out.println(" getMenRom = " + exec.getMemROM(exec.getPc()));
+            exec.setPc(exec.getPc() + 1); //pc++ 
         }
         System.out.println("Program Count: "+exec.getPc());
 
