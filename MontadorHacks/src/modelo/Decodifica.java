@@ -305,11 +305,11 @@ public class Decodifica extends RegMem {
         return jumpString;
     }
 
-    public boolean getIncrementa() {
+    public boolean getIncrementaPC() {
         return incrementaPC;
     }
 
-    public void setIncrementaPC(boolean incrementaPC) {
-        Decodifica.incrementaPC = incrementaPC;
+    public void setIncrementaPC(boolean PC) {
+        incrementaPC = PC;
     }
 }

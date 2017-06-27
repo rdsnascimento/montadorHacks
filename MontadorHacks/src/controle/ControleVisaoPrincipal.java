@@ -57,7 +57,7 @@ public class ControleVisaoPrincipal {
             // JOptionPane.showMessageDialog(null, exec.getPc() + " " + leitor.jump());
             vp.setPC(Integer.toString(exec.getPc()));
 
-            if (leitor.getIncrementa() == true) { //Se não tiver jump então
+            if (leitor.getIncrementaPC() == true) { //Se não tiver jump então
                 exec.setPc(exec.getPc() + 1); //pc++
             } else { //senão
                 exec.setPc(exec.getRegA()); //pc recebe Registrador A

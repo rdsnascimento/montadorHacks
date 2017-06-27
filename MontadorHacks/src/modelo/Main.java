@@ -31,7 +31,7 @@ public class Main {
             leitor.romToDecod(exec.getMemROM(exec.getPc())); //romToDecod (memRom[pc]) ou seja mandando cada instrução da rom pra decodificação
             System.out.println("Comp: " + leitor.operacao() + "\nDestino: " + leitor.destino() + "\nJump: " + leitor.jump() + "\n");
             
-            if (leitor.getIncrementa() == true) { //Se não tiver jump então
+            if (leitor.getIncrementaPC() == true) { //Se não tiver jump então
                 exec.setPc(exec.getPc() + 1); //Pc++ 
             } else { //senão
                 exec.setPc(exec.getRegA()); //Pc recebe RegA
