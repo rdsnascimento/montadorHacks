@@ -26,16 +26,15 @@ public class Main {
         RegMem exec = new RegMem();
 
         exec.setPc(0); //zerando o Pc
-        System.out.println("Verificando erros:");
         while (exec.getMemROM(exec.getPc()) != null) { //while (memRom[pc] != null)
             System.out.println(exec.getMemROM());
             leitor.romToDecod(exec.getMemROM(exec.getPc())); //romToDecod (memRom[pc]) ou seja mandando cada instrução da rom pra decodificação
             System.out.println("Comp: " + leitor.operacao() + "\nDestino: " + leitor.destino() + "\nJump: " + leitor.jump() + "\n");
-//            System.out.println(" getMenRom = " + exec.getMemROM(exec.getPc()));
-            if (leitor.getIncrementa() != false) {
-                exec.setPc(exec.getPc() + 1); //pc++ 
-            } else {
-                exec.setPc(exec.getRegA());
+            
+            if (leitor.getIncrementa() == true) { //Se não tiver jump então
+                exec.setPc(exec.getPc() + 1); //Pc++ 
+            } else { //senão
+                exec.setPc(exec.getRegA()); //Pc recebe RegA
             }
 
             leitor.setIncrementaPC(true);
@@ -43,8 +42,8 @@ public class Main {
         System.out.println("Program Count: " + exec.getPc());
 
         System.out.println("\nImprimindo:");
-        //System.out.println("Registrador D: " + exec.getRegD());
-        //System.out.println("Registrador A: " + exec.getRegA());
+        System.out.println("Registrador D: " + exec.getRegD());
+        System.out.println("Registrador A: " + exec.getRegA());
         System.out.println("Memória[" + 0 + "]: " + exec.getMemDados(0));
         System.out.println("Memória[" + 1 + "]: " + exec.getMemDados(1));
         System.out.println("Memória[" + 2 + "]: " + exec.getMemDados(2));

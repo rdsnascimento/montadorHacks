@@ -17,7 +17,7 @@ public class Decodifica extends RegMem {
     private static String operacao;
     private static String destino;
     private static String jumpString;
-    private static boolean incrementaPC;
+    private static boolean incrementaPC; //se tiver não tiver jump incrementa pc, senão não incrementa
 
     public void decAssembler(String a, String comp, String dest, String jump) {
         //Switch baseado nos Bits do Comp
