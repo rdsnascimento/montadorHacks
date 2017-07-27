@@ -332,7 +332,6 @@
         <Component class="javax.swing.JButton" name="jButtonProximo">
           <Properties>
             <Property name="text" type="java.lang.String" value="Pr&#xf3;ximo"/>
-            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonProximoActionPerformed"/>
@@ -358,7 +357,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButtonPorInstrucao">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Por instru&#xe7;&#xe3;o"/>
+            <Property name="text" type="java.lang.String" value="Executar"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonPorInstrucaoActionPerformed"/>

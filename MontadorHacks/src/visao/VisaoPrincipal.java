@@ -280,7 +280,6 @@ public class VisaoPrincipal extends javax.swing.JFrame {
         });
 
         jButtonProximo.setText("Próximo");
-        jButtonProximo.setEnabled(false);
         jButtonProximo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonProximoActionPerformed(evt);
@@ -303,7 +302,7 @@ public class VisaoPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jButtonPorInstrucao.setText("Por instrução");
+        jButtonPorInstrucao.setText("Executar");
         jButtonPorInstrucao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonPorInstrucaoActionPerformed(evt);
@@ -558,6 +557,7 @@ public class VisaoPrincipal extends javax.swing.JFrame {
 
     private void jButtonLerArquivoPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLerArquivoPrincipalActionPerformed
         cvp.lerArquivoPrincipal(jTextFieldLerArquivo.getText());
+ 
         
     }//GEN-LAST:event_jButtonLerArquivoPrincipalActionPerformed
 
@@ -568,6 +568,8 @@ public class VisaoPrincipal extends javax.swing.JFrame {
         jButtonUltimo.setEnabled(true);
         
         jTableInstrucoes.setRowSelectionInterval(0, 0);
+        cvp.setRodarTudo(true);
+        cvp.rodar();
     }//GEN-LAST:event_jButtonPorInstrucaoActionPerformed
 
     private void jButtonPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPrimeiroActionPerformed
@@ -584,8 +586,10 @@ public class VisaoPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonAnteriorActionPerformed
 
     private void jButtonProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProximoActionPerformed
-        if(jTableInstrucoes.getSelectedRow() < getProgramCont()-1)
-            jTableInstrucoes.setRowSelectionInterval(jTableInstrucoes.getSelectedRow()+1, jTableInstrucoes.getSelectedRow()+1);
+        //if(jTableInstrucoes.getSelectedRow() < getProgramCont()-1){
+            cvp.rodar();
+            //jTableInstrucoes.setRowSelectionInterval(jTableInstrucoes.getSelectedRow()+1, jTableInstrucoes.getSelectedRow()+1);
+        //}
         
     }//GEN-LAST:event_jButtonProximoActionPerformed
 
