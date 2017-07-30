@@ -3,15 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/gleider/Documents/Ciência%20da%20Computação/2017-1/Programação%20de%20Sistemas/Trabalho/montadorHacks/MontadorHacks/src/modelo/Leitura.java</file>
-            <file>file:/home/gleider/Documents/Ciência%20da%20Computação/2017-1/Programação%20de%20Sistemas/Trabalho/montadorHacks/MontadorHacks/src/visao/VisaoPrincipal.java</file>
-            <file>file:/home/gleider/Documents/Ciência%20da%20Computação/2017-1/Programação%20de%20Sistemas/Trabalho/montadorHacks/MontadorHacks/src/modelo/Main.java</file>
-            <file>file:/home/gleider/Documents/Ciência%20da%20Computação/2017-1/Programação%20de%20Sistemas/Trabalho/montadorHacks/MontadorHacks/src/modelo/Decodifica.java</file>
-            <file>file:/home/gleider/Documents/Ciência%20da%20Computação/2017-1/Programação%20de%20Sistemas/Trabalho/montadorHacks/MontadorHacks/src/controle/ControleVisaoPrincipal.java</file>
-            <file>file:/home/gleider/Documents/Ciência%20da%20Computação/2017-1/Programação%20de%20Sistemas/Trabalho/montadorHacks/MontadorHacks/src/controle/ControlePrincipal.java</file>
-            <file>file:/home/gleider/Documents/Ciência%20da%20Computação/2017-1/Programação%20de%20Sistemas/Trabalho/montadorHacks/MontadorHacks/src/modelo/ModeloPrincipal.java</file>
-            <file>file:/home/gleider/Documents/Ciência%20da%20Computação/2017-1/Programação%20de%20Sistemas/Trabalho/montadorHacks/MontadorHacks/src/modelo/RegMem.java</file>
-            <file>file:/home/gleider/Documents/Ciência%20da%20Computação/2017-1/Programação%20de%20Sistemas/Trabalho/montadorHacks/MontadorHacks/src/modelo/ModeloTabela.java</file>
+            <file>file:/C:/Users/Rafael/Desktop/PS/2%20parte/1/montadorHacks/MontadorHacks/src/modelo/SymbolTable.java</file>
+            <file>file:/C:/Users/Rafael/Desktop/PS/2%20parte/1/montadorHacks/MontadorHacks/src/modelo/Decodifica.java</file>
+            <file>file:/C:/Users/Rafael/Desktop/PS/2%20parte/1/montadorHacks/MontadorHacks/src/modelo/RegMem.java</file>
         </group>
     </open-files>
 </project-private>
