@@ -57,30 +57,39 @@ public class ControleVisaoPrincipal {
     }
     
     public void rodar(){
+       
          if(rodarTudo){
             exec.setPc(0); //zerando o Pc
             while (exec.getMemROM(exec.getPc()) != null) { //while (memRom[pc] != null)
-                executar();
+                executar(); 
                 
+                //System.out.println(exec.getPc());
+                //vp.setMemoria(Short.toString(exec.getMemDados(i)), linhaProgCont(getContadorMemoria()), colunaProgCont(getContadorMemoria()));
+                //setContadorMemoria(getContadorMemoria() + 1);
+                //i++;
             }
             rodarTudo = false;
-
         } 
          
         else{
    
             if (exec.getMemROM(exec.getPc()) != null) { //while (memRom[pc] != null)
                 executar();
+              
             }
         }
 
         
-        for (int i = 0; i < exec.getPc(); i++) {
+        /*for (int i = 0; i < exec.getPc(); i++) {
             vp.setMemoria(Short.toString(exec.getMemDados(i)), linhaProgCont(getContadorMemoria()), colunaProgCont(getContadorMemoria()));
             setContadorMemoria(getContadorMemoria() + 1);
-        }
-        vp.setPC(Integer.toString(exec.getPc()));
-        vp.setProgramCont(exec.getPc());
+            
+        }*/
+        
+        
+       vp.setPC(Integer.toString(exec.getPc()));
+       vp.setProgramCont(exec.getPc());
+        
     }
 
     public TableModel getModeloTabelaMemoria(ArrayList lin, String[] col) {
@@ -106,25 +115,32 @@ public class ControleVisaoPrincipal {
   
         public void executar(){
             vp.setInstrucoes(Integer.toString(exec.getPc()), exec.getPc(), 0);
-                vp.setInstrucoes(exec.getMemROM(exec.getPc()), exec.getPc(), 1);
+            vp.setInstrucoes(exec.getMemROM(exec.getPc()), exec.getPc(), 1);
 
-                leitor.romToDecod(exec.getMemROM(exec.getPc())); //romToDecod (memRom[pc]) ou seja mandando cada instrução da rom pra decodificação
+            leitor.romToDecod(exec.getMemROM(exec.getPc())); //romToDecod (memRom[pc]) ou seja mandando cada instrução da rom pra decodificação
 
-                vp.setInstrucoes(leitor.destino(), exec.getPc(), 2);
-                vp.setInstrucoes(leitor.operacao(), exec.getPc(), 3);
-                vp.setInstrucoes(leitor.jump(), exec.getPc(), 4);
-                vp.setRegistrador(Short.toString(exec.getRegA()), Short.toString(exec.getRegD()));
-                // JOptionPane.showMessageDialog(null, exec.getPc() + " " + leitor.jump());
-                vp.setPC(Integer.toString(exec.getPc()));
+            vp.setInstrucoes(leitor.destino(), exec.getPc(), 2);
+            vp.setInstrucoes(leitor.operacao(), exec.getPc(), 3);
+            vp.setInstrucoes(leitor.jump(), exec.getPc(), 4);
+            vp.setRegistrador(Short.toString(exec.getRegA()), Short.toString(exec.getRegD()));
+            // JOptionPane.showMessageDialog(null, exec.getPc() + " " + leitor.jump());
+            vp.setPC(Integer.toString(exec.getPc()));
 
-                if (leitor.getIncrementaPC() == true) { //Se não tiver jump então
-                    exec.setPc(exec.getPc() + 1); //pc++
-                } else { //senão
-                    exec.setPc(exec.getRegA()); //pc recebe Registrador A
-                }
+            if (leitor.getIncrementaPC() == true) { //Se não tiver jump então
+                exec.setPc(exec.getPc() + 1); //pc++
+            } else { //senão
+                exec.setPc(exec.getRegA()); //pc recebe Registrador A
+            }
 
-                leitor.setIncrementaPC(true); //IncrementaPC fica verdadeiro pra próxima instrução
-                vp.setProgramCont(exec.getPc()); 
+            leitor.setIncrementaPC(true); //IncrementaPC fica verdadeiro pra próxima instrução
+            vp.setProgramCont(exec.getPc()); 
+            
+           for (int i = 0; i < exec.getPc(); i++) {
+               vp.setMemoria(Short.toString(exec.getMemDados(i)), linhaProgCont(getContadorMemoria()), colunaProgCont(getContadorMemoria()));
+                setContadorMemoria(getContadorMemoria() + 1);
+            }
+           setContadorMemoria(0);
+            
 
         }
         
