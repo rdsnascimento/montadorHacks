@@ -563,7 +563,6 @@
         <Component class="javax.swing.JButton" name="jButtonAbrirMacro1">
           <Properties>
             <Property name="text" type="java.lang.String" value="Abrir 1"/>
-            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAbrirMacro1ActionPerformed"/>
@@ -746,6 +745,7 @@
         <Component class="javax.swing.JButton" name="jButtonLerArquivoPrincipal">
           <Properties>
             <Property name="text" type="java.lang.String" value="Carregar"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonLerArquivoPrincipalActionPerformed"/>

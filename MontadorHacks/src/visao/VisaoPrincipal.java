@@ -6,13 +6,18 @@
 package visao;
 
 import controle.ControleVisaoPrincipal;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.xml.ws.soap.MTOM;
 import modelo.Ligador;
+import modelo.Macro;
 import modelo.Mc;
 import modelo.ModeloTabela;
 import modelo.Montador;
@@ -28,7 +33,16 @@ public class VisaoPrincipal extends javax.swing.JFrame {
     ModeloTabela mtMemoria;
     ModeloTabela mtInstrucoes;
     int programCont;
+    Macro mc = new Macro();
+    Macro mc2 = new Macro();
 
+    Montador montador = new Montador();
+    Montador montador2 = new Montador();
+    Ligador ligador = new Ligador();
+ 
+    public void mensagemErro(){
+        JOptionPane.showMessageDialog(null, "Erro ao abrir o arquivo");
+    }
     public int getProgramCont() {
         return programCont;
     }
@@ -40,7 +54,21 @@ public class VisaoPrincipal extends javax.swing.JFrame {
      * Creates new form VisaoPrincipal
      */
     public VisaoPrincipal() {
+        
+        
+        montador.setInstrucoesComp();
+        montador.setInstrucoesDest();
+        montador.setInstrucoesJmp();
+        
+   
+        
+        montador2.setInstrucoesComp();
+        montador2.setInstrucoesDest();
+        montador2.setInstrucoesJmp();
+        
+       
         initComponents();
+        
         cvp = new ControleVisaoPrincipal(this);
         ajustes();
         
@@ -398,7 +426,6 @@ public class VisaoPrincipal extends javax.swing.JFrame {
         });
 
         jButtonAbrirMacro1.setText("Abrir 1");
-        jButtonAbrirMacro1.setEnabled(false);
         jButtonAbrirMacro1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAbrirMacro1ActionPerformed(evt);
@@ -574,6 +601,7 @@ public class VisaoPrincipal extends javax.swing.JFrame {
         jLabel9.setText("Carregador");
 
         jButtonLerArquivoPrincipal.setText("Carregar");
+        jButtonLerArquivoPrincipal.setEnabled(false);
         jButtonLerArquivoPrincipal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonLerArquivoPrincipalActionPerformed(evt);
@@ -679,89 +707,147 @@ public class VisaoPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonProximoActionPerformed
 
     private void jButtonMacro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMacro1ActionPerformed
-        jButtonMontador1.setEnabled(true);
-        jButtonAbrirMontador1.setEnabled(true);
+        jButtonAbrirMacro2.setEnabled(true);
         jTextAreaSaida.setText(jTextAreaSaida.getText() + "Macro gerada com sucesso" + "\n----------------------------------------------------------------------------------\n");
         
-        Mc mc = new Mc();
-        /*mc.getMacro();
+        mc.getMacro();
         mc.expandMacro();
-        mc.writeArchive("codemcr.txt");
-        mc.print();*/
+        try {
+            mc.writeArchive("codemcr.txt");
+        } catch (IOException ex) {
+            mensagemErro();
+        }
+        mc.print();
 
     }//GEN-LAST:event_jButtonMacro1ActionPerformed
 
     private void jButtonMontador1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMontador1ActionPerformed
-
-        jTextAreaSaida.setText(jTextAreaSaida.getText() + "Ligador gerado com sucesso" + "\n----------------------------------------------------------------------------------\n");
-        Montador montador = new Montador();
-        /*montador.getTabelaDef();
+        
+        montador.getTabelaDef();
         montador.getTabelaUso();
         montador.getTabelaSimbol();        
-        montador.printftabelaDef("tabelaDef.txt");
-        montador.printftabelaUso("tabelaUso.txt");
-        montador.printftabelaSimbol("tabelaSimbol.txt");
-        montador.geraSaidaMontador("codeMontado.txt","linhas1.txt");
-        */
+        try {
+            montador.printftabelaDef("tabelaDef.txt");
+            montador.printftabelaUso("tabelaUso.txt");
+            montador.printftabelaSimbol("tabelaSimbol.txt");
+            montador.geraSaidaMontador("codeMontado.txt","linhas1.txt");
+            jButtonAbrirMontador2.setEnabled(true);
+            jTextAreaSaida.setText(jTextAreaSaida.getText() + "Ligador gerado com sucesso" + "\n----------------------------------------------------------------------------------\n");
+ 
+        } catch (IOException ex) {
+            mensagemErro();
+        }
+        
+       
     }//GEN-LAST:event_jButtonMontador1ActionPerformed
 
     private void jButtonAbrirMacro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAbrirMacro1ActionPerformed
-        Mc mc = new Mc();
+        try {
+            mc.read("code.txt");
+        } catch (FileNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao ler o arquivo");
+        }
+        jButtonMacro1.setEnabled(true);
+        //Mc mc = new Mc();
        // mc.read("code.txt");
     }//GEN-LAST:event_jButtonAbrirMacro1ActionPerformed
 
     private void jButtonMontador2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMontador2ActionPerformed
-        jButtonLigador.setEnabled(true);
+ 
+        montador2.getTabelaDef();
+        montador2.getTabelaUso();
+        montador2.getTabelaSimbol();        
+        try {
+            montador2.printftabelaDef("tabelaDef2.txt");
+            montador2.printftabelaUso("tabelaUso2.txt");
+            montador2.printftabelaSimbol("tabelaSimbol2.txt");
+            montador2.geraSaidaMontador("codeMontado2.txt","linhas2.txt");
+            jButtonLigador.setEnabled(true);
+            jTextAreaSaida.setText(jTextAreaSaida.getText() + "Ligador gerado com sucesso" + "\n----------------------------------------------------------------------------------\n");
+ 
+        } catch (IOException ex) {
+            mensagemErro();
+        }
         
-        Montador montador = new Montador();
-        /*montador.getTabelaDef();
-        montador.getTabelaUso();
-        montador.getTabelaSimbol();        
-        montador.printftabelaDef("tabelaDef2.txt");
-        montador.printftabelaUso("tabelaUso2.txt");
-        montador.printftabelaSimbol("tabelaSimbol2.txt");
-        montador.geraSaidaMontador("codeMontado2.txt","linhas2.txt");
-        */
+       
         
     }//GEN-LAST:event_jButtonMontador2ActionPerformed
 
     private void jButtonMacro2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMacro2ActionPerformed
-        jButtonMontador2.setEnabled(true);
-        jButtonAbrirMontador2.setEnabled(true);
+        //jButtonMontador1.setEnabled(true);
+        jButtonAbrirMontador1.setEnabled(true);
         jTextAreaSaida.setText(jTextAreaSaida.getText() + "Macro gerada com sucesso" + "\n----------------------------------------------------------------------------------\n");
         
-        Mc mc = new Mc();
-        /*mc.getMacro();
-        mc.expandMacro();
-        mc.writeArchive("codemcr.txt");
-        mc.print();*/
+        
+        mc2.getMacro();
+        mc2.expandMacro();
+        try {
+            mc2.writeArchive("codemcr2.txt");
+        } catch (IOException ex) {
+            mensagemErro();
+        }
+        mc2.print();
     }//GEN-LAST:event_jButtonMacro2ActionPerformed
 
     private void jButtonAbrirMacro2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAbrirMacro2ActionPerformed
-        Mc mc = new Mc();
-       // mc.read("code.txt");
+        jButtonMacro2.setEnabled(true);
+        
+        try {
+            mc2.read("code2.txt");
+        } catch (FileNotFoundException ex) {
+            mensagemErro();
+        }
     }//GEN-LAST:event_jButtonAbrirMacro2ActionPerformed
 
     private void jButtonLigadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLigadorActionPerformed
-        Ligador ligador = new Ligador();
-        /*ligador.read("codeMontado.txt", "codeMontado2.txt");
-        ligador.getLinhas("linhas1.txt", "linhas2.txt");
-        ligador.getTabelaDefSimbol("tabelaSimbol.txt", "tabelaSimbol2.txt");
-        ligador.getTabelaGlobal("tabelaDef.txt", "tabelaDef2.txt");
-        ligador.replaceSimbols();
-        ligador.passagemFinal();          
-        ligador.imprimeFinalCode();
-        ligador.imprimeCodigoFinal("codigoFinal.txt");*/
+       
+        
+        try {
+             ligador.read("codeMontado.txt", "codeMontado2.txt");
+            ligador.getLinhas("linhas1.txt", "linhas2.txt");
+            
+            ligador.getTabelaDefSimbol("tabelaSimbol.txt", "tabelaSimbol2.txt");
+            ligador.getTabelaGlobal("tabelaDef.txt", "tabelaDef2.txt");
+            
+            //ligador.imprimeTabelaSimbolGlobal();
+            
+            ligador.replaceSimbols();
+            //ligador.imprimeCodeIntermediario();
+            ligador.passagemFinal();
+            
+            ligador.imprimeFinalCode();
+            ligador.imprimeCodigoFinal("codigoFinal.txt");
+            jButtonLerArquivoPrincipal.setEnabled(true);
+        
+            
+        } catch (FileNotFoundException ex) {
+            mensagemErro();
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao ligar os módulos");
+        }
+        
+        
     }//GEN-LAST:event_jButtonLigadorActionPerformed
 
     private void jButtonAbrirMontador1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAbrirMontador1ActionPerformed
-        Montador montador = new Montador();
-        //montador.read("codemcr.txt");
+ 
+        try {
+            montador.read("codemcr.txt");
+            jButtonMontador1.setEnabled(true);
+        } catch (FileNotFoundException ex) {
+            mensagemErro();
+        }
     }//GEN-LAST:event_jButtonAbrirMontador1ActionPerformed
 
     private void jButtonAbrirMontador2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAbrirMontador2ActionPerformed
-          Montador montador = new Montador();
-        //montador.read("codemcr2.txt");
+        
+        
+        try {
+            montador2.read("codemcr2.txt");
+            jButtonMontador2.setEnabled(true); 
+        } catch (FileNotFoundException ex) {
+            mensagemErro();
+        }
     }//GEN-LAST:event_jButtonAbrirMontador2ActionPerformed
 
     /**
