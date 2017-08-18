@@ -10,16 +10,16 @@ package modelo;
  * @author Rafael
  */
 public class SymbolTable {
-    private int contTable = 0; //quantidade de elementos que tem na tabela de símbolos
-    private String[] memoria = new String[50];
-    private int [] valor = new int [50];
+    private static int contTable = 0; //quantidade de elementos que tem na tabela de símbolos
+    private static String[] memoria = new String[50];
+    private static int [] valor = new int [50];
 
     public int getContTable() {
         return contTable;
     }
 
     public void setContTable(int contTable) {
-        this.contTable = contTable;
+        SymbolTable.contTable = contTable;
     }
     
     //Verifica se o símbolo está na tabela de símbolos

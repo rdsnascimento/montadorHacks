@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableModel;
 import modelo.Leitura;
+//import modelo.ligador;
 import modelo.ModeloTabela;
 import modelo.RegMem;
 import visao.VisaoPrincipal;
@@ -37,9 +38,25 @@ public class ControleVisaoPrincipal {
     }
     
     public void lerArquivoPrincipal(String arq) {
+        //ligador ligador = new ligador();
+        
         leitor = new Leitura();
         try {
+            //ZERANDO TUDO ANTES DA LEITURA
+            exec.setMemROM();
+            exec.setMemDados();
+            exec.setRegA();
+            exec.setRegD();
+            exec.setIndice();
+            exec.setPc(0);
+            vp.setPC(Integer.toString(exec.getPc()));
+            vp.preencherTabelaInstrucoes();
+            vp.preencherTabelaMemoria();
+            vp.setRegistrador(Short.toString(exec.getRegA()), Short.toString(exec.getRegD()));
+            
             leitor.lerEntrada(arq);
+            //ligador.saida();
+            
             vp.setAreaSaida("Arquivo lido com sucesso.");
             setRodarTudo(false);
             exec.setPc(0);
@@ -59,6 +76,10 @@ public class ControleVisaoPrincipal {
     public void rodar(){
        
          if(rodarTudo){
+            exec.setMemDados();
+            exec.setRegA();
+            exec.setRegD();
+             
             exec.setPc(0); //zerando o Pc
             while (exec.getMemROM(exec.getPc()) != null) { //while (memRom[pc] != null)
                 executar(); 

@@ -12,6 +12,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.xml.ws.soap.MTOM;
+import modelo.ligador;
 import modelo.ModeloTabela;
 
 /**
@@ -72,7 +73,7 @@ public class VisaoPrincipal extends javax.swing.JFrame {
         repaint();
     }
     
-    private void preencherTabelaMemoria(){
+    public void preencherTabelaMemoria(){
         dados = new ArrayList();
         
         String[] colunas = new String[] {"Endreço", "Valor(+0)","Valor(+1)", "Valor(+2)", "Valor(+3)"
@@ -144,10 +145,7 @@ public class VisaoPrincipal extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTableInstrucoes = new javax.swing.JTable();
-        jButtonAnterior = new javax.swing.JButton();
         jButtonProximo = new javax.swing.JButton();
-        jButtonPrimeiro = new javax.swing.JButton();
-        jButtonUltimo = new javax.swing.JButton();
         jButtonPorInstrucao = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -155,10 +153,16 @@ public class VisaoPrincipal extends javax.swing.JFrame {
         jTableMemoria = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jButtonMacro = new javax.swing.JButton();
+        jButtonModulo1 = new javax.swing.JButton();
+        jButtonMontador = new javax.swing.JButton();
+        jButtonAbrirMacro = new javax.swing.JButton();
+        jButtonAbrirLigador = new javax.swing.JButton();
+        jButtonAbrirMontador = new javax.swing.JButton();
+        jButtonModulo2 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -271,34 +275,10 @@ public class VisaoPrincipal extends javax.swing.JFrame {
             jTableInstrucoes.getColumnModel().getColumn(1).setPreferredWidth(6);
         }
 
-        jButtonAnterior.setText("Anterior");
-        jButtonAnterior.setEnabled(false);
-        jButtonAnterior.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAnteriorActionPerformed(evt);
-            }
-        });
-
         jButtonProximo.setText("Próximo");
         jButtonProximo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonProximoActionPerformed(evt);
-            }
-        });
-
-        jButtonPrimeiro.setText("Primeiro");
-        jButtonPrimeiro.setEnabled(false);
-        jButtonPrimeiro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonPrimeiroActionPerformed(evt);
-            }
-        });
-
-        jButtonUltimo.setText("Último");
-        jButtonUltimo.setEnabled(false);
-        jButtonUltimo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonUltimoActionPerformed(evt);
             }
         });
 
@@ -318,12 +298,7 @@ public class VisaoPrincipal extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButtonPrimeiro)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonUltimo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonAnterior)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(232, 232, 232)
                         .addComponent(jButtonProximo)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonPorInstrucao, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -343,10 +318,7 @@ public class VisaoPrincipal extends javax.swing.JFrame {
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonAnterior)
                     .addComponent(jButtonProximo)
-                    .addComponent(jButtonPrimeiro)
-                    .addComponent(jButtonUltimo)
                     .addComponent(jButtonPorInstrucao))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
@@ -397,46 +369,119 @@ public class VisaoPrincipal extends javax.swing.JFrame {
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel7.setFont(new java.awt.Font("Cantarell", 1, 18)); // NOI18N
-        jLabel7.setText("Editor");
+        jLabel7.setText("Gerador de arquivos");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jTextArea1.setText("** Futuramente poderá ser inscrito os comandos aqui.");
-        jScrollPane1.setViewportView(jTextArea1);
+        jLabel11.setText("Macro");
 
-        jButton1.setText("Enviar");
+        jLabel12.setText("Ligador");
 
-        jButton2.setText("Apagar");
+        jLabel13.setText("Montador");
+
+        jButtonMacro.setText("Gerar");
+        jButtonMacro.setEnabled(false);
+        jButtonMacro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMacroActionPerformed(evt);
+            }
+        });
+
+        jButtonModulo1.setText("Módulo 1");
+        jButtonModulo1.setEnabled(false);
+        jButtonModulo1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonModulo1ActionPerformed(evt);
+            }
+        });
+
+        jButtonMontador.setText("Montar");
+        jButtonMontador.setEnabled(false);
+        jButtonMontador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMontadorActionPerformed(evt);
+            }
+        });
+
+        jButtonAbrirMacro.setText("Abrir");
+        jButtonAbrirMacro.setEnabled(false);
+        jButtonAbrirMacro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAbrirMacroActionPerformed(evt);
+            }
+        });
+
+        jButtonAbrirLigador.setText("Ligar");
+        jButtonAbrirLigador.setEnabled(false);
+
+        jButtonAbrirMontador.setText("Abrir");
+        jButtonAbrirMontador.setEnabled(false);
+
+        jButtonModulo2.setText("Módulo 2");
+        jButtonModulo2.setEnabled(false);
+        jButtonModulo2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonModulo2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap(23, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(jButton1)
-                        .addGap(33, 33, 33)
-                        .addComponent(jButton2))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 678, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(285, 285, 285)
-                        .addComponent(jLabel7)))
-                .addContainerGap(31, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addGap(249, 249, 249))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel11)
+                            .addComponent(jButtonMacro, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
+                            .addComponent(jButtonAbrirMacro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(125, 125, 125)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel13)
+                            .addComponent(jButtonMontador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonAbrirMontador, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(108, 108, 108)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jButtonModulo1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(42, 42, 42)
+                                .addComponent(jButtonModulo2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                                        .addComponent(jButtonAbrirLigador, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(101, 101, 101))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                                        .addComponent(jLabel12)
+                                        .addGap(109, 109, 109)))))
+                        .addContainerGap())))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel13))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addContainerGap())
+                    .addComponent(jButtonMacro)
+                    .addComponent(jButtonModulo1)
+                    .addComponent(jButtonMontador)
+                    .addComponent(jButtonModulo2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonAbrirMacro)
+                    .addComponent(jButtonAbrirLigador)
+                    .addComponent(jButtonAbrirMontador))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         jPanel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -477,9 +522,9 @@ public class VisaoPrincipal extends javax.swing.JFrame {
         jTextFieldLerArquivo.setText("input.txt");
 
         jLabel9.setFont(new java.awt.Font("Cantarell", 1, 18)); // NOI18N
-        jLabel9.setText("Ler arquivo");
+        jLabel9.setText("Carregador");
 
-        jButtonLerArquivoPrincipal.setText("Ler");
+        jButtonLerArquivoPrincipal.setText("Carregar");
         jButtonLerArquivoPrincipal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonLerArquivoPrincipalActionPerformed(evt);
@@ -494,12 +539,12 @@ public class VisaoPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jTextFieldLerArquivo, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonLerArquivoPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 74, Short.MAX_VALUE)
+                .addComponent(jButtonLerArquivoPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(132, 132, 132)
                 .addComponent(jLabel9)
-                .addGap(155, 155, 155))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -531,8 +576,8 @@ public class VisaoPrincipal extends javax.swing.JFrame {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -556,34 +601,23 @@ public class VisaoPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonLerArquivoPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLerArquivoPrincipalActionPerformed
+        
         cvp.lerArquivoPrincipal(jTextFieldLerArquivo.getText());
+        jButtonMacro.setEnabled(true);
+        jButtonAbrirMacro.setEnabled(true);
+        
  
         
     }//GEN-LAST:event_jButtonLerArquivoPrincipalActionPerformed
 
     private void jButtonPorInstrucaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPorInstrucaoActionPerformed
-        jButtonAnterior.setEnabled(true);
-        jButtonPrimeiro.setEnabled(true);
+
         jButtonProximo.setEnabled(true);
-        jButtonUltimo.setEnabled(true);
         
         jTableInstrucoes.setRowSelectionInterval(0, 0);
         cvp.setRodarTudo(true);
         cvp.rodar();
     }//GEN-LAST:event_jButtonPorInstrucaoActionPerformed
-
-    private void jButtonPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPrimeiroActionPerformed
-        jTableInstrucoes.setRowSelectionInterval(0, 0);
-    }//GEN-LAST:event_jButtonPrimeiroActionPerformed
-
-    private void jButtonUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUltimoActionPerformed
-        jTableInstrucoes.setRowSelectionInterval(getProgramCont()-1, getProgramCont()-1);
-    }//GEN-LAST:event_jButtonUltimoActionPerformed
-
-    private void jButtonAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAnteriorActionPerformed
-        if(jTableInstrucoes.getSelectedRow() > 0)
-            jTableInstrucoes.setRowSelectionInterval(jTableInstrucoes.getSelectedRow()-1, jTableInstrucoes.getSelectedRow()-1);
-    }//GEN-LAST:event_jButtonAnteriorActionPerformed
 
     private void jButtonProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonProximoActionPerformed
         //if(jTableInstrucoes.getSelectedRow() < getProgramCont()-1){
@@ -592,6 +626,37 @@ public class VisaoPrincipal extends javax.swing.JFrame {
         //}
         
     }//GEN-LAST:event_jButtonProximoActionPerformed
+
+    private void jButtonMacroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMacroActionPerformed
+        jButtonMontador.setEnabled(true);
+        jButtonAbrirMontador.setEnabled(true);
+        jTextAreaSaida.setText(jTextAreaSaida.getText() + "Macro gerada com sucesso" + "\n----------------------------------------------------------------------------------\n");
+        
+
+    }//GEN-LAST:event_jButtonMacroActionPerformed
+
+    private void jButtonMontadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMontadorActionPerformed
+        jButtonModulo1.setEnabled(true);
+        jButtonModulo2.setEnabled(true);
+        jButtonAbrirLigador.setEnabled(true);
+        jTextAreaSaida.setText(jTextAreaSaida.getText() + "Ligador gerado com sucesso" + "\n----------------------------------------------------------------------------------\n");
+
+    }//GEN-LAST:event_jButtonMontadorActionPerformed
+
+    private void jButtonModulo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModulo1ActionPerformed
+        jButtonMontador.setEnabled(true);
+        jButtonAbrirMontador.setEnabled(true);
+        jTextAreaSaida.setText(jTextAreaSaida.getText() + "Montador gerado com sucesso" + "\n----------------------------------------------------------------------------------\n");
+
+    }//GEN-LAST:event_jButtonModulo1ActionPerformed
+
+    private void jButtonAbrirMacroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAbrirMacroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonAbrirMacroActionPerformed
+
+    private void jButtonModulo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModulo2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonModulo2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -629,16 +694,21 @@ public class VisaoPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButtonAnterior;
+    private javax.swing.JButton jButtonAbrirLigador;
+    private javax.swing.JButton jButtonAbrirMacro;
+    private javax.swing.JButton jButtonAbrirMontador;
     private javax.swing.JButton jButtonLerArquivoPrincipal;
+    private javax.swing.JButton jButtonMacro;
+    private javax.swing.JButton jButtonModulo1;
+    private javax.swing.JButton jButtonModulo2;
+    private javax.swing.JButton jButtonMontador;
     private javax.swing.JButton jButtonPorInstrucao;
-    private javax.swing.JButton jButtonPrimeiro;
     private javax.swing.JButton jButtonProximo;
-    private javax.swing.JButton jButtonUltimo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -654,13 +724,11 @@ public class VisaoPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTableInstrucoes;
     private javax.swing.JTable jTableMemoria;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextAreaSaida;
     private javax.swing.JTextField jTextFieldLerArquivo;
     private javax.swing.JTextField jTextFieldPC;

@@ -1,0 +1,33 @@
+EXTR sum
+%j = 2
+%k = 3
+@sum
+D = M
+@j
+M = D
+@0
+D = A
+@k
+M = D
+(LACO2)
+@k
+D = M
+@2
+D = D-A
+@FIM
+D;JGT
+@j
+D = M
+M = D+M
+@k
+M = M+1
+@LACO2
+0;JMP
+(FIM)
+rotuloMacro MACROONE 5
+mcdefn
+l MACROONE arg
+(l)
+@arg
+mcend
+

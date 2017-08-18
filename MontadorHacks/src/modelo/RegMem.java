@@ -18,6 +18,37 @@ public class RegMem {
     private static int indice = 0; //Índice do vetor da Memória de Dados
     private static int pc = 0; //PC sempre vai apontar para a posição da Memória de Instruções (ROM)
 
+    //Zerando memória de Dados
+    public void setMemDados() {
+        for (int i=0; i<32768; i++){
+            memDados[i]=0;
+        }
+    }
+
+    //Zerando memória rom
+    public void setMemROM() {
+        for (int i=0; i<32768; i++){
+            memROM[i]=null;
+        }
+    }
+    
+    //Zerando registrador A
+    public void setRegA() {
+        RegMem.regA = 0;
+    }
+    
+    //Zerando registrador D
+    public void setRegD() {
+        RegMem.regD = 0;
+    }
+    
+    //Zerando indice
+    public void setIndice() {
+        RegMem.indice = 0;
+    }
+    
+    
+    
     /**
      * Getter e Setter Registrador A
      */
