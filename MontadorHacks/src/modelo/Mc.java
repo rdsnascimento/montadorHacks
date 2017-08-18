@@ -11,14 +11,14 @@ import java.util.ArrayList;
  *
  * @author Douglas Janovik Maliszewski
  */
-public class mc {
+public class Mc {
     public ArrayList<String> tabelaMacros;
     public String TituloMacro;
     public ArrayList<String> Args;
     public String label;
     public int num;
     
-    public mc(){
+    public Mc(){
         this.label = new String();
         this.TituloMacro = new String();
         this.tabelaMacros = new ArrayList();

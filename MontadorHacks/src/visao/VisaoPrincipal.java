@@ -12,8 +12,10 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.xml.ws.soap.MTOM;
-import modelo.ligador;
+import modelo.Ligador;
+import modelo.Mc;
 import modelo.ModeloTabela;
+import modelo.Montador;
 
 /**
  *
@@ -156,13 +158,15 @@ public class VisaoPrincipal extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jButtonMacro = new javax.swing.JButton();
-        jButtonModulo1 = new javax.swing.JButton();
-        jButtonMontador = new javax.swing.JButton();
-        jButtonAbrirMacro = new javax.swing.JButton();
-        jButtonAbrirLigador = new javax.swing.JButton();
-        jButtonAbrirMontador = new javax.swing.JButton();
-        jButtonModulo2 = new javax.swing.JButton();
+        jButtonMacro1 = new javax.swing.JButton();
+        jButtonMontador1 = new javax.swing.JButton();
+        jButtonAbrirMacro1 = new javax.swing.JButton();
+        jButtonLigador = new javax.swing.JButton();
+        jButtonAbrirMontador1 = new javax.swing.JButton();
+        jButtonMontador2 = new javax.swing.JButton();
+        jButtonAbrirMontador2 = new javax.swing.JButton();
+        jButtonMacro2 = new javax.swing.JButton();
+        jButtonAbrirMacro2 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -377,49 +381,75 @@ public class VisaoPrincipal extends javax.swing.JFrame {
 
         jLabel13.setText("Montador");
 
-        jButtonMacro.setText("Gerar");
-        jButtonMacro.setEnabled(false);
-        jButtonMacro.addActionListener(new java.awt.event.ActionListener() {
+        jButtonMacro1.setText("Gerar 1");
+        jButtonMacro1.setEnabled(false);
+        jButtonMacro1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonMacroActionPerformed(evt);
+                jButtonMacro1ActionPerformed(evt);
             }
         });
 
-        jButtonModulo1.setText("Módulo 1");
-        jButtonModulo1.setEnabled(false);
-        jButtonModulo1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonMontador1.setText("Montar 1");
+        jButtonMontador1.setEnabled(false);
+        jButtonMontador1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonModulo1ActionPerformed(evt);
+                jButtonMontador1ActionPerformed(evt);
             }
         });
 
-        jButtonMontador.setText("Montar");
-        jButtonMontador.setEnabled(false);
-        jButtonMontador.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAbrirMacro1.setText("Abrir 1");
+        jButtonAbrirMacro1.setEnabled(false);
+        jButtonAbrirMacro1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonMontadorActionPerformed(evt);
+                jButtonAbrirMacro1ActionPerformed(evt);
             }
         });
 
-        jButtonAbrirMacro.setText("Abrir");
-        jButtonAbrirMacro.setEnabled(false);
-        jButtonAbrirMacro.addActionListener(new java.awt.event.ActionListener() {
+        jButtonLigador.setText("Ligar");
+        jButtonLigador.setEnabled(false);
+        jButtonLigador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAbrirMacroActionPerformed(evt);
+                jButtonLigadorActionPerformed(evt);
             }
         });
 
-        jButtonAbrirLigador.setText("Ligar");
-        jButtonAbrirLigador.setEnabled(false);
-
-        jButtonAbrirMontador.setText("Abrir");
-        jButtonAbrirMontador.setEnabled(false);
-
-        jButtonModulo2.setText("Módulo 2");
-        jButtonModulo2.setEnabled(false);
-        jButtonModulo2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAbrirMontador1.setText("Abrir 1");
+        jButtonAbrirMontador1.setEnabled(false);
+        jButtonAbrirMontador1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonModulo2ActionPerformed(evt);
+                jButtonAbrirMontador1ActionPerformed(evt);
+            }
+        });
+
+        jButtonMontador2.setText("Montar 2");
+        jButtonMontador2.setEnabled(false);
+        jButtonMontador2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMontador2ActionPerformed(evt);
+            }
+        });
+
+        jButtonAbrirMontador2.setText("Abrir 2");
+        jButtonAbrirMontador2.setEnabled(false);
+        jButtonAbrirMontador2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAbrirMontador2ActionPerformed(evt);
+            }
+        });
+
+        jButtonMacro2.setText("Gerar 2");
+        jButtonMacro2.setEnabled(false);
+        jButtonMacro2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMacro2ActionPerformed(evt);
+            }
+        });
+
+        jButtonAbrirMacro2.setText("Abrir 2");
+        jButtonAbrirMacro2.setEnabled(false);
+        jButtonAbrirMacro2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAbrirMacro2ActionPerformed(evt);
             }
         });
 
@@ -428,37 +458,45 @@ public class VisaoPrincipal extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap(23, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addGap(249, 249, 249))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel11)
-                            .addComponent(jButtonMacro, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
-                            .addComponent(jButtonAbrirMacro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(125, 125, 125)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel13)
-                            .addComponent(jButtonMontador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonAbrirMontador, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(108, 108, 108)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addComponent(jButtonModulo1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(42, 42, 42)
-                                .addComponent(jButtonModulo2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(56, 56, 56)
+                                .addComponent(jLabel11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                        .addComponent(jButtonAbrirLigador, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(101, 101, 101))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                        .addComponent(jLabel12)
-                                        .addGap(109, 109, 109)))))
-                        .addContainerGap())))
+                                    .addComponent(jButtonMacro1, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
+                                    .addComponent(jButtonAbrirMacro1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jButtonMacro2, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
+                                    .addComponent(jButtonAbrirMacro2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(100, 100, 100)))
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel13)
+                                .addGap(65, 65, 65))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jButtonMontador1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButtonAbrirMontador1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jButtonMontador2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jButtonAbrirMontador2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(128, 128, 128)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButtonLigador, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel12)
+                                .addGap(18, 18, 18)))
+                        .addGap(86, 86, 86))))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -466,21 +504,32 @@ public class VisaoPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel13))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonMacro)
-                    .addComponent(jButtonModulo1)
-                    .addComponent(jButtonMontador)
-                    .addComponent(jButtonModulo2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonAbrirMacro)
-                    .addComponent(jButtonAbrirLigador)
-                    .addComponent(jButtonAbrirMontador))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jButtonMacro1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButtonAbrirMacro1))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jButtonMacro2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButtonAbrirMacro2))
+                            .addComponent(jButtonLigador)))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButtonMontador2, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButtonMontador1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButtonAbrirMontador2)
+                            .addComponent(jButtonAbrirMontador1))))
                 .addContainerGap(41, Short.MAX_VALUE))
         );
 
@@ -519,7 +568,7 @@ public class VisaoPrincipal extends javax.swing.JFrame {
 
         jPanel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jTextFieldLerArquivo.setText("input.txt");
+        jTextFieldLerArquivo.setText("codigoFinal.txt");
 
         jLabel9.setFont(new java.awt.Font("Cantarell", 1, 18)); // NOI18N
         jLabel9.setText("Carregador");
@@ -603,8 +652,10 @@ public class VisaoPrincipal extends javax.swing.JFrame {
     private void jButtonLerArquivoPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLerArquivoPrincipalActionPerformed
         
         cvp.lerArquivoPrincipal(jTextFieldLerArquivo.getText());
-        jButtonMacro.setEnabled(true);
-        jButtonAbrirMacro.setEnabled(true);
+        jButtonMacro1.setEnabled(true);
+        jButtonMacro2.setEnabled(true);
+        jButtonAbrirMacro1.setEnabled(true);
+        jButtonAbrirMacro2.setEnabled(true);
         
  
         
@@ -627,36 +678,91 @@ public class VisaoPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButtonProximoActionPerformed
 
-    private void jButtonMacroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMacroActionPerformed
-        jButtonMontador.setEnabled(true);
-        jButtonAbrirMontador.setEnabled(true);
+    private void jButtonMacro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMacro1ActionPerformed
+        jButtonMontador1.setEnabled(true);
+        jButtonAbrirMontador1.setEnabled(true);
         jTextAreaSaida.setText(jTextAreaSaida.getText() + "Macro gerada com sucesso" + "\n----------------------------------------------------------------------------------\n");
         
+        Mc mc = new Mc();
+        /*mc.getMacro();
+        mc.expandMacro();
+        mc.writeArchive("codemcr.txt");
+        mc.print();*/
 
-    }//GEN-LAST:event_jButtonMacroActionPerformed
+    }//GEN-LAST:event_jButtonMacro1ActionPerformed
 
-    private void jButtonMontadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMontadorActionPerformed
-        jButtonModulo1.setEnabled(true);
-        jButtonModulo2.setEnabled(true);
-        jButtonAbrirLigador.setEnabled(true);
+    private void jButtonMontador1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMontador1ActionPerformed
+
         jTextAreaSaida.setText(jTextAreaSaida.getText() + "Ligador gerado com sucesso" + "\n----------------------------------------------------------------------------------\n");
+        Montador montador = new Montador();
+        /*montador.getTabelaDef();
+        montador.getTabelaUso();
+        montador.getTabelaSimbol();        
+        montador.printftabelaDef("tabelaDef.txt");
+        montador.printftabelaUso("tabelaUso.txt");
+        montador.printftabelaSimbol("tabelaSimbol.txt");
+        montador.geraSaidaMontador("codeMontado.txt","linhas1.txt");
+        */
+    }//GEN-LAST:event_jButtonMontador1ActionPerformed
 
-    }//GEN-LAST:event_jButtonMontadorActionPerformed
+    private void jButtonAbrirMacro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAbrirMacro1ActionPerformed
+        Mc mc = new Mc();
+       // mc.read("code.txt");
+    }//GEN-LAST:event_jButtonAbrirMacro1ActionPerformed
 
-    private void jButtonModulo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModulo1ActionPerformed
-        jButtonMontador.setEnabled(true);
-        jButtonAbrirMontador.setEnabled(true);
-        jTextAreaSaida.setText(jTextAreaSaida.getText() + "Montador gerado com sucesso" + "\n----------------------------------------------------------------------------------\n");
+    private void jButtonMontador2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMontador2ActionPerformed
+        jButtonLigador.setEnabled(true);
+        
+        Montador montador = new Montador();
+        /*montador.getTabelaDef();
+        montador.getTabelaUso();
+        montador.getTabelaSimbol();        
+        montador.printftabelaDef("tabelaDef2.txt");
+        montador.printftabelaUso("tabelaUso2.txt");
+        montador.printftabelaSimbol("tabelaSimbol2.txt");
+        montador.geraSaidaMontador("codeMontado2.txt","linhas2.txt");
+        */
+        
+    }//GEN-LAST:event_jButtonMontador2ActionPerformed
 
-    }//GEN-LAST:event_jButtonModulo1ActionPerformed
+    private void jButtonMacro2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMacro2ActionPerformed
+        jButtonMontador2.setEnabled(true);
+        jButtonAbrirMontador2.setEnabled(true);
+        jTextAreaSaida.setText(jTextAreaSaida.getText() + "Macro gerada com sucesso" + "\n----------------------------------------------------------------------------------\n");
+        
+        Mc mc = new Mc();
+        /*mc.getMacro();
+        mc.expandMacro();
+        mc.writeArchive("codemcr.txt");
+        mc.print();*/
+    }//GEN-LAST:event_jButtonMacro2ActionPerformed
 
-    private void jButtonAbrirMacroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAbrirMacroActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonAbrirMacroActionPerformed
+    private void jButtonAbrirMacro2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAbrirMacro2ActionPerformed
+        Mc mc = new Mc();
+       // mc.read("code.txt");
+    }//GEN-LAST:event_jButtonAbrirMacro2ActionPerformed
 
-    private void jButtonModulo2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonModulo2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonModulo2ActionPerformed
+    private void jButtonLigadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLigadorActionPerformed
+        Ligador ligador = new Ligador();
+        /*ligador.read("codeMontado.txt", "codeMontado2.txt");
+        ligador.getLinhas("linhas1.txt", "linhas2.txt");
+        ligador.getTabelaDefSimbol("tabelaSimbol.txt", "tabelaSimbol2.txt");
+        ligador.getTabelaGlobal("tabelaDef.txt", "tabelaDef2.txt");
+        ligador.replaceSimbols();
+        ligador.passagemFinal();          
+        ligador.imprimeFinalCode();
+        ligador.imprimeCodigoFinal("codigoFinal.txt");*/
+    }//GEN-LAST:event_jButtonLigadorActionPerformed
+
+    private void jButtonAbrirMontador1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAbrirMontador1ActionPerformed
+        Montador montador = new Montador();
+        //montador.read("codemcr.txt");
+    }//GEN-LAST:event_jButtonAbrirMontador1ActionPerformed
+
+    private void jButtonAbrirMontador2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAbrirMontador2ActionPerformed
+          Montador montador = new Montador();
+        //montador.read("codemcr2.txt");
+    }//GEN-LAST:event_jButtonAbrirMontador2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -694,14 +800,16 @@ public class VisaoPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonAbrirLigador;
-    private javax.swing.JButton jButtonAbrirMacro;
-    private javax.swing.JButton jButtonAbrirMontador;
+    private javax.swing.JButton jButtonAbrirMacro1;
+    private javax.swing.JButton jButtonAbrirMacro2;
+    private javax.swing.JButton jButtonAbrirMontador1;
+    private javax.swing.JButton jButtonAbrirMontador2;
     private javax.swing.JButton jButtonLerArquivoPrincipal;
-    private javax.swing.JButton jButtonMacro;
-    private javax.swing.JButton jButtonModulo1;
-    private javax.swing.JButton jButtonModulo2;
-    private javax.swing.JButton jButtonMontador;
+    private javax.swing.JButton jButtonLigador;
+    private javax.swing.JButton jButtonMacro1;
+    private javax.swing.JButton jButtonMacro2;
+    private javax.swing.JButton jButtonMontador1;
+    private javax.swing.JButton jButtonMontador2;
     private javax.swing.JButton jButtonPorInstrucao;
     private javax.swing.JButton jButtonProximo;
     private javax.swing.JLabel jLabel1;

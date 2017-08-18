@@ -32,7 +32,7 @@ public class execucao {
         montador2.setInstrucoesDest();
         montador2.setInstrucoesJmp();
         
-        ligador ligador = new ligador();
+        Ligador ligador = new Ligador();
         
         
         try{

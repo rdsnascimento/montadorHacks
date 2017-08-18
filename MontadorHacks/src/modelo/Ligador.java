@@ -17,7 +17,7 @@ import java.util.Scanner;
  *
  * @author djm
  */
-public class ligador {
+public class Ligador {
     
     public ArrayList <String> code;
     public ArrayList <String> codeIntermediario;
@@ -30,7 +30,7 @@ public class ligador {
     public int tamTabelaDefGlobais;
     public int tamTabelaGlobal;
     
-    public ligador(){
+    public Ligador(){
         
         this.code = new ArrayList();
         this.codeIntermediario = new ArrayList();
@@ -545,7 +545,7 @@ public class ligador {
     public static void main(String[] args){ // metodo main para teste
         
         
-        ligador ligador = new ligador();
+        Ligador ligador = new Ligador();
         
         
     

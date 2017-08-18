@@ -21,7 +21,7 @@ import java.io.IOException;
 
 public class Macro{
    
-    public mc mc[];
+    public Mc mc[];
     public int tamMacro;
     public ArrayList<String> code;
     public ArrayList<String> outPutCode;
@@ -30,13 +30,13 @@ public class Macro{
         
         this.code = new ArrayList();
         this.outPutCode = new ArrayList();
-        this.mc = new mc[100];
+        this.mc = new Mc[100];
         
         int i = 0;
         
         for(i = 0; i < 100; i++){
             
-            this.mc[i] = new mc();
+            this.mc[i] = new Mc();
             
         }
         
