@@ -21,7 +21,7 @@ public class Montador {
     public ArrayList<String> code;
     public TabelaDefSimbol TabelaDefinicoes[];
     public TabelaDefSimbol TabelaSimbol[];
-    public TabelaUSo TabelaUso[];
+    public tabelaUSo TabelaUso[];
     public int tamTabelaDef;
     public int tamTabelaUso;
     public int tamTabelaSimbol;
@@ -55,11 +55,11 @@ public class Montador {
         
         this.tamTabelaSimbol = 0;
         
-        this.TabelaUso = new TabelaUSo[100];
+        this.TabelaUso = new tabelaUSo[100];
         
         for(i = 0; i < 100; i++){
             
-            this.TabelaUso[i] = new TabelaUSo();
+            this.TabelaUso[i] = new tabelaUSo();
             
         }
         
